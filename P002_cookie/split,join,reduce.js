@@ -40,6 +40,7 @@ const value03 = numberArray01.reduce((acc,value,index)=>{
             return acc+value;
      })
 
+
      /*
         1 2 1
         3 3 2
@@ -50,4 +51,36 @@ console.log(value03)
 
 
 
-console.log("----------------------------") 
+console.log("----------------------------")  //reduce의 return 값은 
+
+
+const twoArray = [["정준일","새우깡","새우"],["김근식","감자깡","감자"]]; 
+
+const test01 = twoArray.map(items=>{
+
+    const [k,...vs] = items; 
+
+    return [k,vs.join("=")]
+            //이 꺽쇄의 의미는 return 값이 object(array)라는 의미이다. 
+
+
+})
+
+test01.map(v=>console.log(v)); 
+
+
+const reduceResult = test01.reduce((acc,[k,v])=>{
+                        console.log(k," ",typeof k); 
+                    acc[k.trim()] = v;
+                    return acc; 
+},{})
+
+console.log(reduceResult); 
+
+//음.. 이렇게도 객체
+const test = "헬로우"; 
+const objectTest = {}; 
+objectTest[test] = "Hello"; 
+console.log(objectTest);
+console.log(typeof objectTest[test]); 
+//출력값 :  {헬로우: "Hello"}
