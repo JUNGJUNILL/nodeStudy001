@@ -54,7 +54,8 @@ console.log(value03)
 console.log("----------------------------")  //reduce의 return 값은 
 
 
-const twoArray = [["정준일","새우깡","새우"],["김근식","감자깡","감자"]]; 
+//const twoArray = [["정준일","새우깡","새우"],["김근식","감자깡","감자"]]; 
+const twoArray = ["setCookies","myCookies=test"]; 
 
 const test01 = twoArray.map(items=>{
 
@@ -71,7 +72,7 @@ test01.map(v=>console.log(v));
 
 const reduceResult = test01.reduce((acc,[k,v])=>{
                         console.log(k," ",typeof k); 
-                    acc[k.trim()] = v;
+                    acc[k] = v;
                     return acc; 
 },{})
 
@@ -84,3 +85,30 @@ objectTest[test] = "Hello";
 console.log(objectTest);
 console.log(typeof objectTest[test]); 
 //출력값 :  {헬로우: "Hello"}
+
+
+const session = {}; 
+const expires = new Date(); 
+const name = 'name=123'; 
+expires.setMinutes(expires.getMinutes()+5);
+const randomInt = +new Date(); 
+
+session[randomInt] = {
+
+    name, 
+    expires,
+
+} //프로퍼티 축약
+
+console.log(session);
+
+
+const aaa = 10; 
+const bbb = 20; 
+
+const obj01 = {
+    aaa, 
+    bbb 
+    //이런식으로 프로퍼티 축약을 할 수 있다. 
+}
+console.log(obj01)
