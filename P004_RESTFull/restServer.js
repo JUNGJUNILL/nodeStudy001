@@ -36,7 +36,7 @@ http.createServer((req,res)=>{
 
         //end of req.method === 'GET' 조건식의 return 값이다.(즉, 최종 return 값)
         return fs.readFile(`.${req.url}`,(err,data)=>{
-
+                console.log('readFile-->>  ' + req.url); 
             if(err){
 
                 res.writeHead(404,'NOT FOUND'); 
@@ -70,10 +70,11 @@ http.createServer((req,res)=>{
         }
 
     }else if(req.method === 'PUT'){
-
-        if(req.user.startsWith('/users/')){
-
+      
+        if(req.url.startsWith('/users/')){
+            
             const key = req.url.split('/')[2]; 
+    
             let body = ''; 
             req.on('data',(data)=>{
 
@@ -89,7 +90,7 @@ http.createServer((req,res)=>{
         }
 
     }else if(req.method === 'DELETE'){
-
+        console.log('req.method-->  '  + req.method);
         if(req.url.startsWith('/users/')){
 
             const key = req.url.split('/')[2]; 

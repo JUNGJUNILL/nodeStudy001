@@ -1,6 +1,6 @@
 
 
-const XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
+//const XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
 
 const getUser = ()=>{
 
@@ -20,7 +20,7 @@ const getUser = ()=>{
                 let userDiv = document.createElement('div'); 
                 let span = document.createElement('span'); 
                 span.textContent = users[key]; 
-
+//--------------------------------------------------------------수정버튼 생성 로직
                 let edit = document.createElement('button'); 
                 edit.textContent = '수정'; 
 
@@ -49,31 +49,34 @@ const getUser = ()=>{
 
 
                 });//end of addEventListener()
+//--------------------------------------------------------------수정버튼 생성 로직 끝
 
 
+//--------------------------------------------------------------삭제버튼 생성 로직
                 let remove = document.createElement('button'); 
-                remove.textContent('삭제'); 
+                remove.textContent='삭제'; 
                 remove.addEventListener('click',()=>{
 
-                    let xhr = new XMLHttpRequest(); 
+                    var xhr = new XMLHttpRequest(); 
                     xhr.onload = ()=>{
 
-                        if(xhr === 200){
-                            console.log("remove 버튼 클릭 시 :   " , xhr.responseText);
-                            getUser(); 
+                        if(xhr.status === 200){
+                            console.log(xhr.responseText); 
+                            getUser();
                         }else{
-                            console.error('삭제 버튼 에러 :  ' , xhr.responseText); 
+                            console.error(xhr.responseText);
                         }
                     }; //end of onload
-                    xhr.open('DELETE','/users'+key); 
+                    xhr.open('DELETE','/users/'+key); 
                     xhr.send(); 
                 });//end of addEventListener()
 
+//--------------------------------------------------------------삭제버튼 생성 로직 끝
 
                 userDiv.appendChild(span); 
                 userDiv.appendChild(edit); 
                 userDiv.appendChild(remove); 
-                userDiv.appendChild(userDiv); 
+                list.appendChild(userDiv); 
                 
                 
 
@@ -95,7 +98,7 @@ getUser();
 document.getElementById('form').addEventListener('submit',(e)=>{
 
     e.preventDefault(); 
-    let name  = e.target.username.value;
+    let name  = e.target.userName.value;
     if(!name){
 
         return alert('이름을 입력 하세요');
@@ -119,6 +122,6 @@ document.getElementById('form').addEventListener('submit',(e)=>{
     xhr.open('POST','/users'); 
     xhr.setRequestHeader('Content-Type','application/json'); 
     xhr.send(JSON.stringify({name : name})); 
-    e.target.username.value=''
+    e.target.userName.value=''
 
 });
