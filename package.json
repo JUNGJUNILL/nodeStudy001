@@ -1,0 +1,29 @@
+{
+  "name": "p006npm",
+  "version": "0.0.1",
+  "description": "hello package.json",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodeFile"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JUNGJUNILL/nodeStudy001.git"
+  },
+  "author": "jji",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JUNGJUNILL/nodeStudy001/issues"
+  },
+  "homepage": "https://github.com/JUNGJUNILL/nodeStudy001#readme",
+  "dependencies": {
+    "cookie-parser": "^1.4.4",
+    "express": "^4.17.1",
+    "express-session": "^1.16.2",
+    "morgan": "^1.9.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.1"
+  }
+}
