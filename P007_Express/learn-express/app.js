@@ -4,6 +4,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan'); //로그 남기기 위한 모듈 
 var session = require('express-session'); 
+var flash  = require('connect-flash');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -11,8 +12,13 @@ var usersRouter = require('./routes/users');
 var app = express();
 
 // view engine setup
-console.log("path---->", path); 
-app.set('views', path.join(__dirname, 'views'));
+console.log("path---->", path); //c:\git Repository\nodeStudy001\P007_Express\learn-express (현재 이 파일이 들어있는 root부터 폴더까지) 
+app.set('views', path.join(__dirname, 'views'));  
+//views 템플릿 파일들이 위치한 폴더를 지정하는 것이다. 
+//res.render() 가 이 폴더 기준으로 템플릿 엔진을 찾아서 렌더링합니다. 
+//res.render('index') : views/index.pug를 렌더링한다. 
+//res.render('admin/main') : views/admin/main.pug를 덴더링한다. 
+
 app.set('view engine', 'pug');
 
 app.use((req,res,next)=>{
@@ -72,7 +78,7 @@ app.use(bodyParser.urlencoded({ extended: false }))
 
 
 
-
+//cookieParser
 app.use(cookieParser());
 //요청에 동봉된 쿠키를 해석해줍니다. 
 //해석된 쿠키들은 req.cookies 객체에 들어갑니다. 
@@ -83,6 +89,40 @@ app.use(cookieParser());
 //이제 쿠키들은 제공한 문자열로 서명된 쿠키가 됩니다. 
 //서명된 쿠키는 클라이언트에서 수정했을 때 에러가 발생하므로 클라이언트에서 쿠키로 위함한 행동을 하는 것을 방지할 수 있습니다. 
 
+
+//express-session 
+app.use(session({
+    resave : false,
+    //요청이 왔을 때 세션에 수정 사항이 생기지 않더라도 세션을 다시 저장할지에 대한 설정 
+
+    saveUninitialized : false,
+    //세션에 저장할 내역이 없더라도 세션을 저장할지에 대한 설정, 보통 방문자를 추적할 때 사용 
+
+    secret : 'secret code',
+    //필수항목으로 cookie-parser의 비밀키와 같은 역할을 합니다. 
+
+    cookie : {
+      httpOnly : true,
+      secure : false, 
+    },
+
+}));
+/*
+express-session 1.5버전 이전에는 내부적으로 cooike-parser를 사용하고 있어서 cookie-parser 미들웨어보다 뒤에 
+위치해야 해지만, 1.5 버전 이후부터는 사용하지 않게 되어 순서가 상관없습니다. 그래도 현재 어떤 버전을 사용하고 있는지
+모른다면, cookie-parser 미들웨어 뒤에 놓는 것이 안전합니다. 
+
+express-session은 세션 관리 시 클라이언트에 쿠키를 보냅니다. 이를 세션 쿠키라고 부릅니다. 안전하게 쿠키를 전송하려면 
+쿠키에 서명을 추가해야 하고, 쿠키를 서명하는 데 secret의 값이 필요합니다. cookie-parser의 sercret과 같게 설정해야 합니다. 
+*/
+
+
+//connect-flash 
+app.use(flash()); 
+/*
+connect-flash 미들웨어는 cookie-parser와 express-session을 사용하므로 이들보다는 뒤에 위치해야 한다. 
+
+*/
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
