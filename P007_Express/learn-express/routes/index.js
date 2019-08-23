@@ -1,5 +1,7 @@
 var express = require('express');
 var router = express.Router();
+//01)
+//라우터 객체 생성 후.. 
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -12,3 +14,5 @@ router.get('/', function(req, res, next) {
 });
 
 module.exports = router;
+//02)
+//module.exports = router로 라우터 모듈을 만든다. 
