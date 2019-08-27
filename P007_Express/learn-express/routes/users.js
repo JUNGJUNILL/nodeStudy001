@@ -2,26 +2,17 @@ var express = require('express');
 var router = express.Router();
 
 /* GET users listing. */
-// /users요청의 callback 함수 
-router.get('/', function(req, res, next) {
-  res.locals.userValue = 'respond with a resource userCallBack'; 
-  res.render('users');
+//app.js에서 app.use('/',usersRouter)로 연결했기 때문에 
+// /users와 / 이 합쳐져 /users/로 GET요청을 했을 때 이 라우터의 
+//콜백 함수가 실행됩니다.  
 
+
+
+router.get('/users/:id', function(req, res) {
+
+  res.render('users'); 
 
 });
-
-
-// router.get('/', function(req, res, next) {
-//  console.log('실행됩니다.'); 
-//  res.render('users' , {test : 'jun'}); //이 부분이 이해가 잘 안되고 저 test라는 변수를 view단에서 어떻게 사용 해야 할까? 
-//  next('route');
-// });
-
-
-// router.get('/', function(req, res, next) {
-//   res.locals.userValue = 'respond with a resource userCallBack'; 
-//   res.render('users');
-// });
 
 
 

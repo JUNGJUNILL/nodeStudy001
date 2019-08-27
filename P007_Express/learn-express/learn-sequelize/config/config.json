@@ -1,0 +1,26 @@
+{
+  "development": {
+    "username": "sa",
+    "password": "hubmeka",
+    "database": "test123",
+    "host": "127.0.0.1",
+    "dialect": "mssql",
+    "operatorsAliases": false
+  },
+  "test": {
+    "username": "root",
+    "password": null,
+    "database": "database_test",
+    "host": "127.0.0.1",
+    "dialect": "mysql",
+    "operatorsAliases": false
+  },
+  "production": {
+    "username": "root",
+    "password": null,
+    "database": "database_production",
+    "host": "127.0.0.1",
+    "dialect": "mysql",
+    "operatorsAliases": false
+  }
+}

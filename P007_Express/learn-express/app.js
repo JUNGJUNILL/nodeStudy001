@@ -19,8 +19,11 @@ app.set('views', path.join(__dirname, 'views'));
 //res.render('index') : views/index.pug를 렌더링한다. 
 //res.render('admin/main') : views/admin/main.pug를 덴더링한다. 
 
-//app.set('view engine', 'pug');
-app.set('view engine','ejs'); 
+app.set('view engine', 'pug');
+//app.set('view engine','ejs'); 
+
+//어떤 템플릿 엔진을 사용할 것인지? 
+//pug? , ejs? 
 
 app.use((req,res,next)=>{
 
@@ -125,7 +128,7 @@ connect-flash 미들웨어는 cookie-parser와 express-session을 사용하므�
 
 */
 
-app.use('/', indexRouter);
+app.use('/index', indexRouter);
 app.use('/users', usersRouter);
 //라우팅 미들웨어는 첫 번째 인자로 주소를 받아서 특정 주소에 해당하는 
 //요청이 왔을 때만 미들웨어가 동작할 수도 있다. 
