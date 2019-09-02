@@ -1,0 +1,25 @@
+{
+  "development": {
+    "username": "sa",
+    "password": "hubmeka",
+    "database": "test123",
+    "host": "localhost",
+    "dialect": "mssql"
+ 
+  },
+  "test": {
+    "username": "sa",
+    "password": "hubmeka",
+    "database": "test123",
+    "host": "localhost",
+    "dialect": "mssql"
+  },
+  "production": {
+    "username": "sa",
+    "password": "hubmeka",
+    "database": "test123",
+    "host": "localhost",
+    "dialect": "mssql"
+
+  }
+}
