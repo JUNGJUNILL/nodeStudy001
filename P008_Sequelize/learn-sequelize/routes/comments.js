@@ -7,7 +7,7 @@ var router = express.Router();
 /* GET users listing. */
 router.get('/:id', function(req, res, next) {
  
-    Comment.findAll({
+    Comment.findAll({ //findAll은 select * from Commnets (풀 조회)
 
       include: {
           model : User, 
@@ -29,7 +29,7 @@ router.get('/:id', function(req, res, next) {
 
 router.post('/',function(req,res,next){
 
-    Comment.create({
+    Comment.create({ //insert 문 
 
         commenter: req.body.id,
         comment: req.body.comment,
@@ -62,5 +62,18 @@ router.patch('/:id' , function(req,res,next){
 });
 
 
+
+
+router.delete('/:delete',function(req,res,next){
+
+  Comment.destroy({ where: {id: req.param.id } }).then((result)=>{ //destroy , delete문 
+    res.json(result); 
+
+  }).catch((err)=>{
+    console.err(err); 
+    next(err); 
+
+  });
+});
 
 module.exports = router;
