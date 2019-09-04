@@ -7,6 +7,11 @@ module.exports = (sequelize , DataType)=>{
             primaryKey:true,
         },
 
+        commenter:{
+            type:DataType.INTEGER,
+            allowNull: false,
+        },
+
         comment: {
             type: DataType.STRING(100),
             allowNull: false,

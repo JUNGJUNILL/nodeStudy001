@@ -22,7 +22,7 @@ router.get('/:id', function(req, res, next) {
 
 router.post('/', function(req, res, next) {
   Comment.create({
-    id:  req.body.id,
+    id: req.body.id,
     commenter: req.body.id,
     comment: req.body.comment,
   })
