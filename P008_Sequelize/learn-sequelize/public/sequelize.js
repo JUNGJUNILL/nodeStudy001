@@ -50,17 +50,22 @@ document.querySelectorAll('#user-list tr').forEach(function (el) {
         tbody.innerHTML = '';
         comments.map(function (comment) {
           var row = document.createElement('tr');
+          
           var td = document.createElement('td');
           td.textContent = comment.id;
           row.appendChild(td);
+         
           td = document.createElement('td');
           td.textContent = comment.user.name;
           row.appendChild(td);
+         
           td = document.createElement('td');
           td.textContent = comment.comment;
           row.appendChild(td);
+        
           var edit = document.createElement('button');
           edit.textContent = '수정';
+
           edit.addEventListener('click', function () { // 수정 클릭 시
             var newComment = prompt('바꿀 내용을 입력하세요');
             if (!newComment) {
@@ -81,6 +86,8 @@ document.querySelectorAll('#user-list tr').forEach(function (el) {
           });
           var remove = document.createElement('button');
           remove.textContent = '삭제';
+       
+
           remove.addEventListener('click', function () { // 삭제 클릭 시
             var xhr = new XMLHttpRequest();
             xhr.onload = function () {
@@ -94,6 +101,11 @@ document.querySelectorAll('#user-list tr').forEach(function (el) {
             xhr.open('DELETE', '/comments/' + comment.id);
             xhr.send();
           });
+
+          td = document.createElement('td');
+          row.appendChild(td);
+          td.textContent = comment.seq;
+
           td = document.createElement('td');
           td.appendChild(edit);
           row.appendChild(td);
