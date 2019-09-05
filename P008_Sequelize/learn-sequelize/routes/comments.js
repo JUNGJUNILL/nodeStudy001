@@ -37,7 +37,7 @@ router.post('/', function(req, res, next) {
 });
 
 router.patch('/:id', function(req, res, next) {
-  Comment.update({ comment: req.body.comment }, { where: { id: req.params.id } })
+  Comment.update({ comment: req.body.comment }, { where: { id: req.params.id , seq: 13 } })
     .then((result) => {
       res.json(result);
     })
