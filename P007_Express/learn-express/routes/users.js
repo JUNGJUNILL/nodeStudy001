@@ -8,9 +8,9 @@ var router = express.Router();
 
 
 
-router.get('/users/:id', function(req, res) {
+router.get('/', function(req, res) {
 
-  res.render('users'); 
+  res.render('users',{ title : 'Users'}); 
 
 });
 

@@ -128,7 +128,7 @@ connect-flash 미들웨어는 cookie-parser와 express-session을 사용하므�
 
 */
 
-app.use('/index', indexRouter);
+app.use('/', indexRouter);
 app.use('/users', usersRouter);
 //라우팅 미들웨어는 첫 번째 인자로 주소를 받아서 특정 주소에 해당하는 
 //요청이 왔을 때만 미들웨어가 동작할 수도 있다. 
