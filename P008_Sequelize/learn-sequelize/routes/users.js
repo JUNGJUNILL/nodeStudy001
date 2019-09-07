@@ -20,9 +20,9 @@ router.get('/', function(req, res, next) {
 
 
 router.post('/',function(req,res,next){
-
+  
   User.create({
-
+      id  : 4, 
       name: req.body.name, 
       age: req.body.age,
       married: req.body.married,

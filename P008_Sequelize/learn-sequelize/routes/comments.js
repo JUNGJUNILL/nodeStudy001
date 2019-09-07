@@ -37,8 +37,9 @@ router.post('/', function(req, res, next) {
     });
 });
 
-router.patch('/:id', function(req, res, next) {
-  Comment.update({ comment: req.body.comment }, { where: { id: req.params.id , seq: 13 } })
+router.patch('/:id/seq/:seq', function(req, res, next) {
+  Comment.update({ comment: req.body.comment }, 
+                 { where: { id: req.params.id , seq: req.params.seq } })
     .then((result) => {
       res.json(result);
     })
@@ -48,8 +49,8 @@ router.patch('/:id', function(req, res, next) {
     });
 });
 
-router.delete('/:id', function(req, res, next) {
-  Comment.destroy({ where: { id: req.params.id } })
+router.delete('/:id/seq/:seq', function(req, res, next) {
+  Comment.destroy({ where: { id: req.params.id, seq: req.params.seq  } })
     .then((result) => {
       res.json(result);
     })

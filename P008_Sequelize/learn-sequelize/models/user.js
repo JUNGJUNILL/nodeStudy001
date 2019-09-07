@@ -2,6 +2,12 @@ module.exports = (sequelize , DataType)=>{
 
     return sequelize.define('user',{
 
+        id:{
+            type:DataType.INTEGER,
+            primaryKey:true,
+
+        },
+
         name: {
             type: DataType.STRING(20),
             allowNull: false,
@@ -16,7 +22,7 @@ module.exports = (sequelize , DataType)=>{
         },
 
         married: {
-            type: DataType.BOOLEAN,
+            type: DataType.TINYINT,
             allowNull: false,
 
         },
