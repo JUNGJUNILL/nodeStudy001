@@ -1,8 +1,17 @@
 
 const condition =true; 
 const promise = new Promise((resolve,reject)=>{
-    if(condition){
+    if(condition){ //더 이상 처리할 코드가 없을 때 resolve를 실행한다.
+                   //즉, resolve는 가장 마지막에 실행된다. 
       resolve('성공'); 
+      console.log('오반아 휘파람을 불어라')
+      console.log('오반아 휘파람을 불어라')
+      console.log('오반아 휘파람을 불어라')
+      console.log('오반아 휘파람을 불어라')
+      console.log('오반아 휘파람을 불어라')
+      console.log('오반아 휘파람을 불어라')
+      console.log('오반아 휘파람을 불어라')
+
     }else{
       reject('실패'); 
     }

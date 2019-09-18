@@ -2,6 +2,7 @@
 
 //yield* 표현식은 다른 생성기 또는 이터러블 객체에 yield를 위임할 때 사용 
 //이터러블한 객체로 변환(?)
+//이터러블한 값을만 쪼갤 수 있다. 
 function* func1(){
 
   yield* "42"; 
@@ -19,6 +20,7 @@ const iter = func2();
 console.log(iter.next().value);
 console.log(iter.next().value);
 console.log(iter.next().value);
+
 console.log('-----------------------------------------------------------')
 
 
