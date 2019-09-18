@@ -6,6 +6,7 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var commentsRouter = require('./routes/comments');
 var connect     = require('./schemas'); //schemas/index.js를 app.js와 연결하여 노드 실행 시 mongoose.connect 부분이 실행되도록 한다. 
 
 var app = express();
@@ -23,7 +24,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-
+app.use('/comments', commentsRouter);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));

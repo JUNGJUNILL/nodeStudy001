@@ -11,7 +11,7 @@ var router = express.Router();
 // /users와 / 이 합쳐져 /users/로 GET요청을 했을 때 이 라우터의 
 //콜백 함수가 실행됩니다.  
 
-//라우터를 사용할 필요없이 app.jsd에서 app.get('/',미들웨어), app.get('/users',미들웨어)를 해도
+//라우터를 사용할 필요없이 app.js에서 app.get('/',미들웨어), app.get('/users',미들웨어)를 해도
 //기능은 동일합니다. 하지만 코드 관리를 위해 라우터를 별도로 분리하는 것입니다. 
 
 
