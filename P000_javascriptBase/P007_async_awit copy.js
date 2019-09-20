@@ -50,3 +50,9 @@ const stillConcurrent = () =>{
 }
 
 stillConcurrent(); 
+
+
+
+const tt = require('./testmodule'); 
+
+tt.func('pram'); 

@@ -5,7 +5,7 @@
 
 const path=require('path'); 
 const string =__filename;
-console.log('__dirname-->' , __dirname); 
+console.log('__dirname-->' , __dirname); //현재 이 파일의 root부터 폴더까지의 위치  
 console.log(string);
 console.log('----------------------------------------------------------------------------------')
 console.log('path.sep', path.sep);
@@ -29,5 +29,5 @@ console.log('path.isAbsolute()',path.isAbsolute('..\\..\\..\\path.js')); //상�
 console.log('path.relative()',path.relative('C:\\git Repository\\nodeStudy001\\P000_내장모듈\\path.js','C:\\git Repository\\nodeStudy001'))
 //A 경로에서 B경로로 가기 위해서는?
 console.log('path.join()',path.join(__dirname,'path.js')); 
-console.log('path.join()',path.join(__dirname,'P001_test01')); 
+console.log('path.join()',path.join(__dirname,'P001_test01','jun.js')); 
 //A경로 +B경로 +C경로... 

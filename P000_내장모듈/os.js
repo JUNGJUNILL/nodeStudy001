@@ -1,5 +1,11 @@
 
 const os = require('os'); 
+const {odd , even} = require('./module'); 
+const func = require('../P000_javascriptBase/testmodule'); 
+console.log(odd); 
+
+func.func('good'); 
+
 
 console.log('운영체제 정보------------------'); 
 console.log('os.arch() : ' + os.arch()); 

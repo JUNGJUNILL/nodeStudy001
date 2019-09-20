@@ -10,14 +10,21 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
 var app = express();
+//app.set()에 대한 고찰 
+//Express가 템플릿을 렌더링 하려면 애플리케이션 설정이 필요하다
+//예)
+// app.set('views','')
+// app.set('view engine', 'pug');
+// EXPRESS와 호환되는 템플릿 엔진(pug)는 __express(filePath,options,callback) 라는 이름의 함수를 내보내며,
+// 이 함수는 res.render()함수에 의해 호출되어 템플릿 코드를 렌더링 한다. 
+
 
 // view engine setup
-console.log("path---->", path); //c:\git Repository\nodeStudy001\P007_Express\learn-express (현재 이 파일이 들어있는 root부터 폴더까지) 
-app.set('views', path.join(__dirname, 'views'));  
+app.set('views', './views');  //c:\git Repository\nodeStudy001\P007_Express\learn-express (현재 이 파일이 들어있는 root부터 폴더까지) 
 //views 템플릿 파일들이 위치한 폴더를 지정하는 것이다. 
 //res.render() 가 이 폴더 기준으로 템플릿 엔진을 찾아서 렌더링합니다. 
 //res.render('index') : views/index.pug를 렌더링한다. 
-//res.render('admin/main') : views/admin/main.pug를 덴더링한다. 
+//res.render('admin/main') : views/admin/main.pug를 렌더링한다. 
 
 app.set('view engine', 'pug');
 //app.set('view engine','ejs'); 
@@ -35,9 +42,10 @@ app.use(logger('dev')); //logger(???) : 파라메터 값 마다 저장되는 로
 
 //-------------------------------------------------------------
 //static 미들웨어 
+console.log("path---->", path);
 console.log('__dirname-->', __dirname); 
 app.use(express.static(path.join(__dirname, 'public')));
-console.log(path.join(__dirname, 'public')); 
+console.log("public-->  " , path.join(__dirname, 'public')); 
 //app.use(express.static(__dirname+'/public')); 로도 사용 가능하다. 
 //__가 붙은 변수들은 항상 뭔가 특별한 변수들이다... 
 //__dirname : node에서 제공하는 node 파일의 경로를 담고 있는 변수이다. 

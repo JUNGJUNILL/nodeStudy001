@@ -1,1 +1,6 @@
-console.log('heeo'); 
+
+
+const test = ()=>{
+
+    alert('test'); 
+}

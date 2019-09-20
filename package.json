@@ -1,5 +1,5 @@
 {
-  "name": "p006npm",
+  "name": "nodebird",
   "version": "0.0.1",
   "description": "hello package.json",
   "main": "index.js",
@@ -12,7 +12,7 @@
     "url": "git+https://github.com/JUNGJUNILL/nodeStudy001.git"
   },
   "author": "jji",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/JUNGJUNILL/nodeStudy001/issues"
   },
@@ -22,8 +22,10 @@
     "express": "^4.17.1",
     "express-session": "^1.16.2",
     "morgan": "^1.9.1",
+    "node-fetch": "^2.6.0",
     "sequelize": "^5.18.0",
-    "tedious": "^6.3.0"
+    "tedious": "^6.3.0",
+    "xmlhttprequest": "^1.8.0"
   },
   "devDependencies": {
     "nodemon": "^1.19.1"
