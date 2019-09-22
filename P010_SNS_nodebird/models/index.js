@@ -1,79 +1,55 @@
-'use strict';
-
-const fs = require('fs');
-const path = require('path');
 const Sequelize = require('sequelize');
-const basename = path.basename(__filename);
 const env = process.env.NODE_ENV || 'development';
 const config = require(__dirname + '/../config/config.json')[env];
 const db = {};
 
-let sequelize;
-if (config.use_env_variable) {
-  sequelize = new Sequelize(process.env[config.use_env_variable], config);
-} else {
-  sequelize = new Sequelize(config.database, config.username, config.password, config);
-}
+const sequelize = new Sequelize(config.database,config.username,config.password,config); 
 
-fs
-  .readdirSync(__dirname)
-  .filter(file => {
-    return (file.indexOf('.') !== 0) && (file !== basename) && (file.slice(-3) === '.js');
+sequelize
+  .authenticate()
+  .then(() => {
+    console.log('Connection has been established successfully.');
   })
-  .forEach(file => {
-    const model = sequelize['import'](path.join(__dirname, file));
-    db[model.name] = model;
+  .catch(err => {
+    console.error('Unable to connect to the database:', err);
   });
 
-Object.keys(db).forEach(modelName => {
-  if (db[modelName].associate) {
-    db[modelName].associate(db);
-  }
-});
+
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
-module.exports = db;
-/*
+
+db.User = require('./user')(sequelize,Sequelize); 
+db.Post = require('./post')(sequelize,Sequelize); 
+db.Hashtag = require('./hashtag')(sequelize,Sequelize); 
+
+db.User.hasMany(db.Post);  //1 : M 구조 
+db.Post.belongsTo(db.User);  // M : 1 구조 
+
+// db.Post.belongsToMany(db.Hashtag, { through: 'PostHashtag' });
+// db.Hashtag.belongsToMany(db.Post, { through: 'PostHashtag' });
 
 
-create table birdusers(
+db.User.belongsToMany(db.User,{
 
-	userid varchar(20) primary key,
-	email  varchar(40) not null, 
-	nick   varchar(15) not null , 
-	passwords varchar(100) not null,
-	provider  varchar(10) not null check(provider='local'),
-	snsId    varchar(30) not null ,
-	remark01 varchar(100), 
-	remark02 varchar(100) 
+  foreignKey : 'followingId',
+  as : 'Followers', 
+  through : 'Follow', //'Follow' 이라는 이름으로 테이블 생성할겨, 
 
-)
+}); 
 
+db.User.belongsToMany(db.User,{
 
-create table posts(
-	userid varchar(20) not null, 
-	seq    int Identity(1,1) NOT NULL, 
-	primary key clustered(
-	userid, seq 
-	), 
-	img  varchar(200)
+  foreignKey : 'followingId',
+  as : 'Followings', 
+  through : 'Follow',
 
-)
+}); 
 
-create table hashtags(
-	userid varchar(20) not null, 
-	seq    int  NOT NULL, 
-	primary key clustered(
-	userid, seq 
-	), 
-	title varchar(15) not null 
-
-	
-	
-
-)
+module.exports = db; 
 
 
-*/
+
+
+
