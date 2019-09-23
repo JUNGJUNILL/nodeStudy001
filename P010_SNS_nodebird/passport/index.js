@@ -3,6 +3,7 @@ const local = require('./localStrategy');
 
 const { User } =require('../models'); 
 
+//https://stackoverflow.com/questions/19948816/passport-js-error-failed-to-serialize-user-into-session
 module.exports = (passport)=>{
 
     passport.serializeUser((user,done)=>{

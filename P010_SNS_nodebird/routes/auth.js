@@ -3,7 +3,8 @@ const passport = require('passport');
 const bcrypt = require('bcrypt');
 const { isLoggedIn, isNotLoggedIn } = require('./middlewares');
 const { User } = require('../models');
-const router = express.Router(); 
+
+const router = express.Router();
 
 router.post('/join', isNotLoggedIn, async (req, res, next) => {
 
@@ -29,7 +30,7 @@ router.post('/join', isNotLoggedIn, async (req, res, next) => {
         userid,
         email,
         nick,
-        passwords: hash,
+        password: hash,
         remark01 : password,
       });
       return res.redirect('/');
@@ -38,18 +39,14 @@ router.post('/join', isNotLoggedIn, async (req, res, next) => {
       return next(error);
     }
   });
-
-
   router.post('/login', isNotLoggedIn, (req, res, next) => {
     passport.authenticate('local', (authError, user, info) => {
       if (authError) {
-
-        console.log('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%111'); 
         console.error(authError);
         return next(authError);
       }
       if (!user) {
-        console.log("잌,,,"); 
+        console.log(user.email);
         req.flash('loginError', info.message);
         return res.redirect('/');
       }
