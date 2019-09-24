@@ -28,11 +28,32 @@ module.exports = (sequelize, DataType)=> (
 
         },
 
-    } ,{
+        createdAt: {
+            type: DataType.DATE,
+            allowNull: false, 
+            defaultValue: sequelize.literal('getdate()'), 
+                          //이 메서드는 인자로 넣은 문자를 그대로 사용하는 역할을 한다. 
+        },
 
-        timestamps: true,
-        paranoid: true, 
+        updatedAt: {
+            type: DataType.DATE,
+            allowNull: false, 
+            defaultValue: sequelize.literal('getdate()'), 
+                          //이 메서드는 인자로 넣은 문자를 그대로 사용하는 역할을 한다. 
+        },
 
+        deletedAt: {
+            type: DataType.DATE,
+            allowNull: false, 
+            defaultValue: sequelize.literal('getdate()'), 
+                          //이 메서드는 인자로 넣은 문자를 그대로 사용하는 역할을 한다. 
+        },
+
+    } 
+    
+    
+    ,{
+        timestamps: false,
     })
 
 ); 

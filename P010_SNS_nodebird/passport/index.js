@@ -13,22 +13,27 @@ module.exports = (passport)=>{
              
              //세션에 사용자 정보를 모두 저장하면 세션의 용량이 커지고 데이터 일관성에 문제가 발생하므로
              //사용자의 아이디만 저장하려고 명령한 것입니다. 
-
-        done(null,user.id); 
+        //console.log(user); 
+        console.log('user    ' + user)
+        console.log('user.id        ' + user.userid); 
+        done(null,user.userid); 
     }); 
 
 
 
-passport.deserializeUser((id,done)=>{
+passport.deserializeUser((userid,done)=>{
             //매 요청시 실행된다. passport.session() 미들웨어가 이 메서드를 호출한다.
-            //serializeUser에서 세션에 저장했던 아이디를 받아 데이터베이스에서 사용자 정보를 조회한다.
+            //serializeUser에서 세션에 저장 했던 아이디를 받아 데이터베이스에서 사용자 정보를 조회한다.
             //조회한 정보를 req.user에 저장하므로, 앞으로 req.user를 통해 
             //로그인한 사용자의 정보를 가져올 수 있습니다. 
+           // done(null,id)
+           console.log('호호호호호'  + User); 
+            console.log('하하하하하 ' + userid); 
+           User.findOne({ where: { userid } })
+           .then(user => done(null, user))
+           .catch(err => done(err));
 
 
-    User.find({where : {id} })
-    .then(user=>done(null,user))
-    .catch(err=>done(err)); 
 
 }); 
 

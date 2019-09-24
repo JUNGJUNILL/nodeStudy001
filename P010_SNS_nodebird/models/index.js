@@ -1,8 +1,7 @@
 const Sequelize = require('sequelize');
 const env = process.env.NODE_ENV || 'development';
-const config = require(__dirname + '/../config/config.json')[env];
+const config = require('../config/config')[env];
 const db = {};
-
 const sequelize = new Sequelize(config.database,config.username,config.password,config); 
 
 sequelize
@@ -27,8 +26,8 @@ db.Hashtag = require('./hashtag')(sequelize,Sequelize);
 db.User.hasMany(db.Post);  //1 : M 구조 
 db.Post.belongsTo(db.User);  // M : 1 구조 
 
-// db.Post.belongsToMany(db.Hashtag, { through: 'PostHashtag' });
-// db.Hashtag.belongsToMany(db.Post, { through: 'PostHashtag' });
+//db.Post.belongsToMany(db.Hashtag, { through: 'PostHashtag' });
+//db.Hashtag.belongsToMany(db.Post, { through: 'PostHashtag' });
 
 
 db.User.belongsToMany(db.User,{

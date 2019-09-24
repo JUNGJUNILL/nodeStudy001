@@ -40,13 +40,13 @@ router.post('/join', isNotLoggedIn, async (req, res, next) => {
     }
   });
   router.post('/login', isNotLoggedIn, (req, res, next) => {
-    passport.authenticate('local', (authError, user, info) => {
+    passport.authenticate('local',{session: false}, (authError, user, info) => {
       if (authError) {
         console.error(authError);
         return next(authError);
       }
       if (!user) {
-        console.log(user.email);
+        console.log('user ' + user) ; 
         req.flash('loginError', info.message);
         return res.redirect('/');
       }

@@ -22,11 +22,11 @@ module.exports = (passport) => {
 
     try {
       const exUser = await User.findOne({ where: { email } });
-     // console.log('exUser   ' , exUser);
+ 
       if (exUser) {
-        console.log('password   '  , password); 
+        
         const result = await bcrypt.compare(password, exUser.password);
-        console.log('result  ' , result); 
+        console.log('password   '  , password + '  :  ' + 'result  ' , result); 
         if (result) {
           done(null, exUser);
         } else {
