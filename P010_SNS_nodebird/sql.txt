@@ -1,0 +1,156 @@
+use test123
+
+sp_Help birdusers
+drop table birdusers
+sp_help birdusers
+create table birdusers(
+
+	userid varchar(20) not null ,
+	email  varchar(40) not null,
+		primary key clustered(
+	userid, email 
+	), 
+	nick   varchar(15) not null , 
+	password  varchar(100) not null,
+	providers  varchar(100) not null,
+	snsId    varchar(30)  ,
+	remark01 varchar(100), 
+	remark02 varchar(100) ,
+	createdAt date,
+	updatedAt date,
+	deletedAt date
+)
+
+insert into birdusers(
+userid,
+email,
+nick,
+passwords
+)
+values('test','test@naver.com','hee','123123')
+
+drop table posts
+
+create table posts(
+	userid varchar(20) PRIMARY KEY , 
+	seq    int Identity(1,1) NOT NULL , 
+
+	img  varchar(200),
+	content varchar(140) not null 
+
+)
+
+sp_Help hashtags
+drop table hashtags
+create table hashtags(
+	
+	seq    int primary key, 
+	title varchar(15) not null 
+
+
+
+)
+
+drop table follow
+create table follow(
+	
+	followers  varchar(20) not null ,
+	followings  varchar(20) not null ,
+			primary key clustered(
+	followers, followings 
+	)
+
+
+)
+
+begin tran 
+insert into follow values('tvrkwhdk','fkdldjseodnl')
+insert into follow values('tvrkwhdk','captainryan')
+insert into follow values('tvrkwhdk','dala1207')
+
+
+insert into follow values('fkdldjseodnl','tvrkwhdk')
+insert into follow values('fkdldjseodnl','captainryan')
+insert into follow values('fkdldjseodnl','dala1207')
+
+
+insert into follow values('captainryan','dala1207')
+
+insert into follow values('dala1207','tvrkwhdk')
+insert into follow values('dala1207','captainryan')
+
+
+commit
+
+
+select 
+*
+from users 
+
+sp_help users 
+
+
+sp_Help PostHashtag
+
+drop table PostHashtags
+create table PostHashtags(
+
+	postUserid varchar(20) FOREIGN KEY REFERENCES posts(userid),
+	hashtagSeq int FOREIGN KEY REFERENCES hashtags(seq),
+	
+		primary key clustered(
+	postUserid, hashtagSeq 
+	),
+
+
+)
+
+select 
+*
+from follow
+
+select 
+*
+from birdusers
+
+select 
+*
+from hashtags
+
+
+
+sp_help birdusers
+
+
+select 
+*
+from hashtags
+
+select 
+*
+from PostHashtags
+
+
+drop table PostHashtags
+select 
+*
+from posts
+
+sp_Help posts
+
+create table PostHashtags( 
+createdAt	datetimeoffset not null, 
+updatedAt	datetimeoffset not null,
+postUserid NVARCHAR(20)  ,
+hashtagSeq int foreign key REFERENCES hashtags(seq),
+primary key(
+postUserid,hashtagSeq
+)
+
+
+
+
+
+)
+
+alter table hashtags add constraint rrrr foreign key seq REFERENCES posts(seq)
