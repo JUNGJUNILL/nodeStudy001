@@ -15,23 +15,38 @@ module.exports = (passport)=>{
              //사용자의 아이디만 저장하려고 명령한 것입니다. 
         //console.log(user); 
         console.log('user    ' + user)
-        console.log('user.id        ' + user.userid); 
-        done(null,user.userid); 
+        console.log('user.id        ' + user.id); 
+        done(null,user.id); 
     }); 
 
 
 
-passport.deserializeUser((userid,done)=>{
+passport.deserializeUser((id,done)=>{
             //매 요청시 실행된다. passport.session() 미들웨어가 이 메서드를 호출한다.
             //serializeUser에서 세션에 저장 했던 아이디를 받아 데이터베이스에서 사용자 정보를 조회한다.
             //조회한 정보를 req.user에 저장하므로, 앞으로 req.user를 통해 
             //로그인한 사용자의 정보를 가져올 수 있습니다. 
            // done(null,id)
-           console.log('호호호호호'  + User); 
-            console.log('하하하하하 ' + userid); 
-           User.findOne({ where: { userid } })
+      
+         /*  User.findOne({ where: { id } })
            .then(user => done(null, user))
            .catch(err => done(err));
+         */
+
+        User.findOne({
+            where :{ id },
+            include:[
+              
+               { model:User, 
+                 attributes:['id','nick'],
+                 as:'Followers',
+                    },   
+               { model:User,
+                attributes:['id','nick'],
+                as:'Followings', 
+                    }],
+        }).then(user => done(null, user))
+        .catch(err => done(err));
 
 
 

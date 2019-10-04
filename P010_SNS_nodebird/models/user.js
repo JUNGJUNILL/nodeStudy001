@@ -1,58 +1,29 @@
-module.exports = (sequelize, DataType) => (
-
-    sequelize.define('birduser',{
-
-            userid: {
-
-                type:DataType.STRING(20), 
-                primaryKey:true,
-                
-
-            },                  
-
-            email: {
-
-                
-                type:DataType.STRING(40), 
-                primaryKey:true,
-
-            }, 
-
-            nick: {
-
-                type: DataType.STRING(15),
-                allowNull: false,
-            },
-
-            password:{
-
-                type: DataType.STRING(100),
-                allowNull: false,
-            },
-
-            providers:{
-
-
-                type: DataType.STRING(100),
-                allowNull: false,
-                defaultValue: 'local',
-            },
-
-            snsId:{
-
-                type: DataType.STRING(30),
-                allowNull: true,
-            },
-
-            remark01:{
-
-                type: DataType.STRING(100),
-                allowNull: true,
-            },
-        },
-            {
-
-                timestamps: true,
-                paranoid: true, 
-            })
-);
+module.exports = (sequelize, DataTypes) => (
+    sequelize.define('user', {
+      email: {
+        type: DataTypes.STRING(40),
+        allowNull: true,
+        unique: true,
+      },
+      nick: {
+        type: DataTypes.STRING(15),
+        allowNull: false,
+      },
+      password: {
+        type: DataTypes.STRING(100),
+        allowNull: true,
+      },
+      provider: {
+        type: DataTypes.STRING(10),
+        allowNull: false,
+        defaultValue: 'local',
+      },
+      snsId: {
+        type: DataTypes.STRING(30),
+        allowNull: true,
+      },
+    }, {
+      timestamps: true,
+      paranoid: true,
+    })
+  );

@@ -8,7 +8,6 @@ const router = express.Router();
 
 router.get('/profile',isLoggedIn, (req,res)=>{
                      
-
     res.render('profile',{title:'내 정보 - NodeBird',user: req.user}); 
 
 });
@@ -25,26 +24,32 @@ router.get('/join',isNotLoggedIn,(req,res)=>{
 
 });
 router.get('/', (req, res, next) => {
-    Post.findAll({
-        attributes: ['userid','seq','content','img','createdAt','updatedAt','deletedAt'],
-      include: {
-        model: User,
-        attributes: ['userid','nick'],
-      },
+
+      Post.findAll({
+        
+        include:{
+          model: User, //post 테이블이랑 user랑 조인 걸겠다. users의   
+          attributes:['id','nick'], //특정 컬럼만 뽑겠다. 
+          //where: {} 조인조건?
+        },
+
+        order: [['createdAt','DESC']],
+      })
+      .then((posts)=>{
+        
  
-    })
-      .then((posts) => {
-        res.render('main', {
-          title: 'NodeBird',
-          twits: posts,
-          user: req.user,
-          loginError: req.flash('loginError'),
+        res.render('main',{
+            title:'NodeBird',
+            twits:posts, 
+            user:req.user,
+            loginError:req.flash('loginError'), 
         });
       })
-      .catch((error) => {
-        console.error(error);
-        next(error);
+      .catch((error)=>{
+        console.error(error); 
+        next(error); 
       });
+
   });
 
 

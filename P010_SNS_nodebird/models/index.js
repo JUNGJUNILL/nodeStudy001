@@ -29,10 +29,10 @@ db.Post.belongsTo(db.User);  // M : 1 구조
 
 //belongsToMany n : m 관계 설정시 사용 
 //테이블의 이름을 정하는 through 속성은 필수적이다.
-//db.Post.belongsToMany(db.Hashtag, { through: 'PostHashtag' });
-//  db.Hashtag.belongsToMany(db.Post, { through: 'PostHashtag' });
+db.Post.belongsToMany(db.Hashtag, { through: 'PostHashtag' });
+db.Hashtag.belongsToMany(db.Post, { through: 'PostHashtag' });
 
-/*
+
 db.User.belongsToMany(db.User,{
 
   foreignKey : 'followingId',
@@ -48,7 +48,7 @@ db.User.belongsToMany(db.User,{
   through : 'Follow',
 
 }); 
-*/
+
 module.exports = db; 
 
 

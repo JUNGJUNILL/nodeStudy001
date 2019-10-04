@@ -52,3 +52,30 @@ promise.then((message01)=>{
 }).catch((error)=>{  
     console.log(error); 
 })
+
+
+console.log('------------------------------------------------------------------promise.all'); 
+
+
+const p1 = Promise.resolve(3); 
+const p2 = 1337; 
+const p3 =new Promise((resolve,reject)=>{
+
+        resolve('foo'); 
+
+});
+
+
+Promise.all([p1,p2,p3]).then(message=>{
+    console.log(message); 
+})
+
+
+
+
+var fruits = ['Banana', 'Orange', 'Lemon', 'Apple', 'Mango'];
+var citrus = fruits.slice(1);
+var test = fruits.slice(1,3); 
+console.log('test->' + test); 
+
+console.log(citrus);

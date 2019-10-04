@@ -8,17 +8,10 @@ const router = express.Router();
 
 router.post('/join', isNotLoggedIn, async (req, res, next) => {
 
-    const userid = req.body.userid; 
-    const email = req.body.email; 
-    const nick = req.body.nick; 
-    const password = req.body.password; 
+   
+    const {email, nick, password} = req.body; 
 
     try {
-      const id =await User.findOne({ where: { userid } });
-      if(id){
-        req.flash('joinError', '이미 가입된 아이디입니다.');
-        return res.redirect('/join');
-      }
 
       const exUser = await User.findOne({ where: { email } });
       if (exUser) {
@@ -27,11 +20,9 @@ router.post('/join', isNotLoggedIn, async (req, res, next) => {
       }
       const hash = await bcrypt.hash(password, 12); //암호화 해서 넣는다. 
       await User.create({
-        userid,
         email,
         nick,
         password: hash,
-        remark01 : password,
       });
       return res.redirect('/');
     } catch (error) {
@@ -40,7 +31,7 @@ router.post('/join', isNotLoggedIn, async (req, res, next) => {
     }
   });
   router.post('/login', isNotLoggedIn, (req, res, next) => {
-    passport.authenticate('local',{session: false}, (authError, user, info) => {
+    passport.authenticate('local', (authError, user, info) => {
       if (authError) {
         console.error(authError);
         return next(authError);
@@ -61,15 +52,27 @@ router.post('/join', isNotLoggedIn, async (req, res, next) => {
   });
 
 
+  router.get('/logout', isLoggedIn, (req, res) => {
+    req.logout();
+    req.session.destroy();
+    res.redirect('/');
+  });
+  
 
-router.get('/logout', isLoggedIn , (req,res)=>{
 
 
-    req.logout(); 
-    req.session.destroy(); 
-    res.redirect('/'); 
+
+router.get('/kakao',passport.authenticate('kakao')); 
+router.get('/kakao/callback',passport.authenticate(
+                                                    'kakao',
+                                                    {failureRedirect:'/',}),
+                                                    (req,res)=>{
+                                                        res.redirect('/'); 
+                                                       }); 
+                                                       
 
 
-}); 
+
+
 
 module.exports = router; 
