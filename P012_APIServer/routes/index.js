@@ -31,7 +31,6 @@ router.get('/',(req,res,next)=>{
 
 router.post('/domain',(req,res,next)=>{
 
-    console.log('req.user.id=> ===>' , req.user.id);
 
     Domain.create({
 

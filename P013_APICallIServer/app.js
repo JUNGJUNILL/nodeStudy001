@@ -1,16 +1,13 @@
 const express = require('express');
 const path = require('path');
-const cookieParser = require('cookie-parser');
-const passport = require('passport');
 const morgan = require('morgan');
+const cookieParser = require('cookie-parser');
 const session = require('express-session');
-const flash = require('connect-flash');
 require('dotenv').config();
 
 const indexRouter = require('./routes');
 
 const app = express();
-
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
@@ -27,7 +24,6 @@ app.use(session({
     secure: false,
   },
 }));
-
 
 app.use('/', indexRouter);
 
