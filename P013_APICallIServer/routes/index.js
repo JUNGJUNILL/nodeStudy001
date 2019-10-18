@@ -4,6 +4,13 @@ const axios = require('axios');
 const router = express.Router(); 
 const URL = 'http://localhost:8002/v1'; 
 
+
+router.get('/',(req,res)=>{
+
+    res.render('main',{key:process.env.CLIENT_SECRET}); 
+
+}); 
+
 const request = async (req, api)=>{
 
     try{
@@ -15,13 +22,14 @@ const request = async (req, api)=>{
         }
 
             return await axios.get(`${URL}${api}`,{
-                headers: {authorization:req.session.jwt}, 
+                headers: {authorization:req.session.jwt}, //
+            
             }); //API 요청 
 
 
     }catch(error){
         console.error(error); 
-        if(error.response.status < 500 ){
+        if(error.response.status  < 500 ){
             //410이나 419처럼 의도된 에러면 발생 
             return error.response; 
         }
@@ -29,6 +37,7 @@ const request = async (req, api)=>{
     }
 
 };
+
 
 
 router.get('/posts',async (req,res,next)=>{
@@ -63,6 +72,20 @@ router.get('/search/:hashtag', async (req,res,next)=>{
         }
     }
 
+});
+
+
+router.get('/test', async (req,res,next)=>{
+
+
+    try{
+        const result = await request(req,'/test');
+        res.json(result.data); 
+
+    }catch(error){
+        console.error(error); 
+        next(error); 
+    }
 });
 
 

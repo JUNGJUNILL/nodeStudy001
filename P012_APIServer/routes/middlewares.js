@@ -57,7 +57,30 @@ exports.verifyToken = (req,res,next) =>{
 
 
     }
-
-
 }; 
 
+
+
+
+exports.apiLimiter = new RateLimit({
+  windowMs: 60 * 1000, // 1분동안
+  max: 1, //1 번 요청 할 수 있다. 
+  delayMs: 0,
+  handler(req, res) {
+    res.status(this.statusCode).json({
+      code: this.statusCode, // 기본값 429
+      message: '1분에 한 번만 요청할 수 있습니다.',
+    });
+  },
+});
+
+
+  
+exports.deprecated = (req,res)=>{
+
+  res.status(410).json({
+      code:410,
+      message:'새로운 버전이 나왔습니다. 새로운 버전을 사용하세요.',
+  });
+
+}                                 
