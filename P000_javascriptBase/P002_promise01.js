@@ -66,8 +66,8 @@ const p3 =new Promise((resolve,reject)=>{
 });
 
 
-Promise.all([p1,p2,p3]).then(message=>{
-    console.log(message); 
+Promise.all(p1,p2,p3).then(message=>{
+    console.log('Give me a message-> :    ' , message); 
 })
 
 
