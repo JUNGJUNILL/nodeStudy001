@@ -1,32 +1,19 @@
-doctype
-html
-  head
-    meta(charset='utf-8')
-    title GIF 체팅방 
-  body
+extends layout
+
+block content
   div F12를 눌러 console 탭과 network 탭을 확인하세요.
-  script(src='/socket.io/socket.io.js');
-  // /socket.io/socket.io.js은 Socket.IO에서 클라이언트로 제공하는 스크립트이다. 
-  // 이 스크립트를 통해 서버와 유사한 API로 웹 소켓 통신이 가능하다. 
-
+  script(src='/socket.io/socket.io.js')
+  
   script.
-               //▼ : 스크립트를 통해 서버와 유사한 API로 웹 소켓 통신이 가능하다. 
-    var socket = io.connect('http://localhost:8005',{path:'/socket.io'});
-                                                     //▲이 부분이 서버의 path와 일치해야 통신이 가능하다.  
+    var socket = io.connect('http://localhost:8005', {
+      path: '/socket.io',
+      transports: ['websocket']
+    });
+    //서버랑 클라이언트랑 소켓 연결...
+    //  const io = SocketIO(server,{path:'/socket.io'}); 
+    // 서버쪽이랑 PATH가 동일해야 한다. 
 
-      socket.on('news',function(data){
-                 //▲서버에서 보내는 news 이벤트를 받기 위해 news 이벤트 리스너를 붙여두었다. 
-                
-        console.log(data); 
-        socket.emit('reply','Hello Node.js'); 
-      })
-
-
-    webSocket.onopen = function () {
-      console.log('서버와 웹소켓 연결 성공!');
-    }
-    webSocket.onmessage = function (event) {
-      console.log(event.data);
-      
-      webSocket.send('클라이언트에서 서버로 답장을 보냅니다');
-    }
+    socket.on('news', function (data) {
+      console.log(data);
+      socket.emit('reply', 'Client to Hello Node.JS');
+    },);

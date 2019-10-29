@@ -31,7 +31,8 @@ app.use(session({
 }));
 app.use(flash());
 
-app.use('/', indexRouter);
+
+app.use('/', indexRouter)
 
 app.use((req, res, next) => {
   const err = new Error('Not Found');
@@ -51,3 +52,6 @@ const server = app.listen(app.get('port'), () => {
 });
 
 webSocket(server);
+
+
+

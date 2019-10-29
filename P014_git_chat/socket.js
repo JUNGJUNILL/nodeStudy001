@@ -8,10 +8,11 @@ module.exports = (server) => {
 
 
     io.on('connection',(socket)=>{
-          //connection 이벤트는 클라이언트가 접속 했을 때, 발생하고 콜백으로 소켓 객체를 제공한다. 
+          //connection 이벤트는 클라이언트가 접속 했을 때, 발생하고 콜백으로 소켓 객체를 제공한다.
+          //(io와 socket 객체가 Socket.IO의 핵심이다.) 
 
-    const req = socket.request; //소켓 속성으로 요청 객체에 접근이 가능하다. 응답객체로도 접근이 가능하다. 
-    const ip = req.header['x-forwarded-for'] || req.connection.remoteAddress; 
+    const req = socket.request; //소켓 속성으로 요청 객체에 접근이 가능하다. 응답객체(socket.request.res)로도 접근이 가능하다. 
+    const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
     
     console.log('새로운 클라이언트 접속==>' , ip , socket.id , req.ip);
     
@@ -27,7 +28,7 @@ module.exports = (server) => {
 
     }); 
 
-    socket.on('replay',(data)=>{
+    socket.on('reply',(data)=>{
               //▲사용자가 직접 만든 이벤트 , 클라이언트에서 reply라는 이벤트명으로 데이터를 보낼 때 서버에서 받는 부분
 
        console.log(data); 
@@ -36,11 +37,11 @@ module.exports = (server) => {
 
     socket.interval = setInterval(()=>{
 
-      socket.emit('news','Hello Socket.IO'); 
+      socket.emit('news','Server to Hello Socket.IO'); 
       //3초마다 클라이언트 한 명에게 메시지를 보내는 부분이 있다. 
       //인자가 두 개입니다. 
       //emit(a,b) : a:이벤트 이름, b:데이터 , 즉, news라는 이벤트 이름으로 Hello Socket.IO라는 데이터를 클라이언트에게 보낸 것이다. 
-      //이 메시지를 받기 위해서는 news 이벤트 리스너를 만들어두어야 합니다. 
+      //클라이언트가 이 메시지를 받기 위해서는 news 이벤트 리스너를 만들어두어야 합니다. 
 
     },3000);
 
