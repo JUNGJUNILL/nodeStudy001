@@ -1,0 +1,9 @@
+express && npm I
+(express 기본 구조 세팅) 
+
+npm install connect-flash 
+npm install dotenv
+npm install morgan --요청에 대한 정보를 콘솔에 기록함 
+npm install pug
+npm install ws     --웹 소켓
+npm install socket.io --ws 업그레이드 버전... 

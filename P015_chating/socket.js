@@ -19,7 +19,7 @@ module.exports = (server) =>{
 
         socket.on('reply',(data)=>{
 
-            console.log(data); 
+            console.log(data+"뿌레낑뚜루꿍"); 
 
         });
 
