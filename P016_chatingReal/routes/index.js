@@ -27,7 +27,7 @@ router.post('/room', async (req, res, next) => {
       owner: req.session.color,
       password: req.body.password,
     });
-    const newRoom = await room.save();
+    const newRoom = await room.save(); // insert 
     const io = req.app.get('io');
     io.of('/room').emit('newRoom', newRoom);
     res.redirect(`/room/${newRoom._id}?password=${req.body.password}`);
@@ -54,10 +54,16 @@ router.get('/room/:id', async (req, res, next) => {
       req.flash('roomError', '허용 인원이 초과하였습니다.');
       return res.redirect('/');
     }
+
+    const chats = await Chat.find({roo:room._id}).sort('createdAt'); 
+    //먼저 GET /room/:id 라우터에서 방 접속 시 기존 채팅 내역을 불러오도록 수정합니다.
+    //방 접속 시 DB로부터 채팅 내역을 가져오고, 
+    //접속 후에는 웹 소켓으로 새로운 채팅 메시지를 받습니다.  
+
     return res.render('chat', {
       room,
       title: room.title,
-      chats: [],
+      chats,
       user: req.session.color,
     });
   } catch (error) {
@@ -65,6 +71,29 @@ router.get('/room/:id', async (req, res, next) => {
     return next(error);
   }
 });
+
+
+router.post('/room/:id/chat', async (req, res, next) => {
+  try {
+    const chat = new Chat({
+      room: req.params.id,
+      user: req.session.color,
+      chat: req.body.chat,
+    });
+    await chat.save();
+    req.app.get('io').of('/chat').to(req.params.id).emit('chat', chat);
+    //채팅을 데이터베이스에 저장한 후 req.params.id(방 아이디) 같은 방에 있는
+    //소켓들에게 메시지 데이터를 전송합니다.
+
+    res.send('ok');
+  } catch (error) {
+    console.error(error);
+    next(error);
+  }
+});
+
+
+
 
 router.delete('/room/:id', async (req, res, next) => {
   try {
@@ -79,5 +108,11 @@ router.delete('/room/:id', async (req, res, next) => {
     next(error);
   }
 });
+
+
+
+
+
+
 
 module.exports = router;

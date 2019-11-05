@@ -9,7 +9,7 @@ require('dotenv').config();
 
 const webSocket = require('./socket');
 const indexRouter = require('./routes');
-const connect = require('./schemas');
+const connect = require('./schemas'); //index.js require 하는 것임 
 
 const app = express();
 connect();
@@ -23,7 +23,7 @@ const sessionMiddleware = session({
     secure: false,
   },
 });
-// Socket.IO엣 세션에 접근하기 위한 작업 
+// Socket.IO에서 세션에 접근하기 위한 작업 
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
