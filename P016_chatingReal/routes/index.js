@@ -15,6 +15,7 @@ router.get('/', async (req, res, next) => {
   }
 });
 
+//채팅방 생성 요청 
 router.get('/room', (req, res) => {
   res.render('room', { title: 'GIF 채팅방 생성' });
 });

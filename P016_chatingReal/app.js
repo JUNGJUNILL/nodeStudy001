@@ -5,11 +5,13 @@ const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const flash = require('connect-flash');
 const ColorHash = require('color-hash');
+const passport  =require('passport'); 
 require('dotenv').config();
 
 const webSocket = require('./socket');
 const indexRouter = require('./routes');
 const connect = require('./schemas'); //index.js require 하는 것임 
+const passportConfig = re
 
 const app = express();
 connect();

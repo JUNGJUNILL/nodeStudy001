@@ -5,3 +5,8 @@ npm install pug
 npm install socket.io
 npm install axios
 npm install morgan
+
+
+
+passport 모듈 관련 패키지 
+npm i passport passport-local passport-kakao bcrypt 

@@ -23,7 +23,7 @@ http.createServer((req,res)=>{
     const cookies = parseCookies(req.headers.cookie); 
    
     if(req.url.startsWith('/login')){
-      
+        console.log(req.url); 
         const {query} = url.parse(req.url); 
         const {name} = qs.parse(query); 
         const expires = new Date(); 
@@ -40,7 +40,6 @@ http.createServer((req,res)=>{
             'Set-Cookie':`name=${encodeURIComponent(name)};Expires=${expires.toUTCString()};HttpOnly;Path=/`,
                            //헤더 값은 한글이 들어갈 수 없어서 인코등해 줬다.
         });
-        console.log("cookies.name--->" + cookies.name); 
         res.end();
 
 
