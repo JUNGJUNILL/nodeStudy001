@@ -41,7 +41,7 @@ module.exports = ()=>{
         }); 
 
         require('./chat'); 
-        require('./room.js'); 
+        require('./room'); 
         require('./user'); 
         
 

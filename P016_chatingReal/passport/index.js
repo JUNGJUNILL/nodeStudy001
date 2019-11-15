@@ -1,7 +1,7 @@
 const local = require('./localStrategy'); 
 const kakao = require('./kakaoStrategy');
 
-const {User} =require('../models'); 
+const User =require('../schemas/user'); 
 
 module.exports = (passport)=>{
 
@@ -14,23 +14,22 @@ module.exports = (passport)=>{
               //serializeUser는 req.session 객체에 어떤 데이터를 저장할지 선택한다. 
 
 
-        done(null,user.id); 
+        done(null,user.email); 
                   //매개변수 user를 받아, done 함수의 두 번째 인자로 user.id를 넘기고 있다. 
                   //첫번째 인자는 에러 발생 시 사용하는 것이므로 두 번째 인자가 중요하다. 
                   //즉, req.session에는 user.id가 저장된다. 
     }); 
 
 
-    passport.deserializeUser((id,done)=>{
+    passport.deserializeUser((email,done)=>{
              //매 요청 시 실행된다. 
              //app.js -> app.use(passport.session()) 미들웨어가 이 메서드를 호출한다.
              //passport.serializeUser메서드에서 받은 user.id를 데이베이스에서 사용자 정보를 조회한다.
-             
-
-
-        User.findOne({where:{id}})
+                     
+        User.findOne({email:email},{_id:0,email:1,nick:1})
         .then(user=>{done(null,user)
-        console.log('deserializeUser user   ====>   ',user);    
+        console.log('deserializeUser user   ====>   ',user);  
+        console.log('user.email :  ' , user.email);  
         })
                               //▲해당 아이디에 상응하는 select 데이터를 
                               //user에 저장하고 이것은 req.user에 저장된다. 

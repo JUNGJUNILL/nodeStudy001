@@ -1,20 +1,44 @@
-const monggoose =require('mongoose'); 
+const mongoose = require('mongoose');
 
-
-const {Schema} = monggoose; 
+const {Schema} = mongoose; 
 const userSchema  = new Schema({
 
 
-    userName : {
+    email : {
         type:String, 
         unique:true, 
-        required : true, //꼭 입력해야 한다. 
+        required : true, //꼭 입력해야 한다. (not null true)
     },
-    nickName : {type : String, trim: true, },
-    password : {type: String,},
-    partCode : {type: String,},
-    remark01 : {type: String,},
-    remark02 : {type: String,},
+
+    nick : {
+        type:String, 
+        required : false, 
+    },
+    password:{
+        type:String, 
+        required : true,
+    },
+    provider: {
+        type:String,
+        required:false,
+        default:'local', 
+    },
+    snsId:{
+        type:String,
+        required:false,
+    },
+    partCode:{
+        type:String, 
+        required : true,
+    },
+    createdAt: {
+        type: Date,
+        default: Date.now,
+      },
+
+    
+
+
 
 
 });  

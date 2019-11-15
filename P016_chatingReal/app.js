@@ -5,16 +5,21 @@ const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const flash = require('connect-flash');
 const ColorHash = require('color-hash');
-const passport  =require('passport'); 
+const passport  =require('passport');
+ 
 require('dotenv').config();
 
 const webSocket = require('./socket');
 const indexRouter = require('./routes');
+const authRouter = require('./routes/auth');
+const pageRouter = require('./routes/page');
 const connect = require('./schemas'); //index.js require 하는 것임 
-const passportConfig = re
+const passportConfig = require('./passport'); 
 
 const app = express();
 connect();
+passportConfig(passport); 
+
 
 const sessionMiddleware = session({
   resave: false,
@@ -27,6 +32,8 @@ const sessionMiddleware = session({
 });
 // Socket.IO에서 세션에 접근하기 위한 작업 
 
+
+
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 app.set('port', process.env.PORT || 8005);
@@ -38,7 +45,9 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser(process.env.COOKIE_SECRET));
 app.use(sessionMiddleware);
 app.use(flash());
-
+app.use(passport.initialize());
+app.use(passport.session());
+/*
 app.use((req, res, next) => {
   if (!req.session.color) {
          //sessoinData 
@@ -51,8 +60,10 @@ app.use((req, res, next) => {
   }
   next();
 });
-
+*/
 app.use('/', indexRouter);
+app.use('/auth',authRouter);
+app.use('/page',pageRouter);  
 
 app.use((req, res, next) => {
   const err = new Error('Not Found');

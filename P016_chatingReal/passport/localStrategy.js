@@ -3,7 +3,7 @@ const LocalStrategy = require('passport-local').Strategy;
 
 const bcrypt = require('bcrypt'); 
 
-const {User} = require('../models'); 
+const User = require('../schemas/user'); 
 
 module.exports=(passport)=>{
 
@@ -26,19 +26,35 @@ module.exports=(passport)=>{
 
         try{
 
-            const exUser = await User.findOne({where:{email}}); 
+            //const exUser =  await User.findOne({where:{email}}).select('email');
+            //const exUser =  await User.find().where('email').equals('dala1207@naver.com');  
+            //const exUser =  await User.find({name:"email"});  
+            const exUser =  await User.findOne({email:email},{email:1,nick:1,partCode:1});  
             if(exUser){
-                const result = await bcrypt.compare(password,exUser.password); 
-
-                if(result){
+                //const result = await bcrypt.compare(password,exUser.password); 
+                /*await bcrypt.compare(password,exUser.partCode,(err,res)=>{
+                   if(res){
+                    done(null,exUser); 
+                   }else{
+                    done(null,false,{message:'비밀번호가 일치하지 않습니다.'})
+                   }
+                }); */
+                if(password === exUser.partCode){
                     done(null,exUser); 
                 }else{
                     done(null,false,{message:'비밀번호가 일치하지 않습니다.'})
                 }
 
+                /*if(result){
+                    done(null,exUser); 
+                }else{
+                    done(null,false,{message:'비밀번호가 일치하지 않습니다.'})
+                }
+                */
+
             }else{
                 
-                done(null,false,{message:'가입되지 않은 회원입니다.'}); 
+                done(null,false,{message:exUser}); 
 
             }
 

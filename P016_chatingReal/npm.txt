@@ -10,3 +10,9 @@ npm install morgan
 
 passport 모듈 관련 패키지 
 npm i passport passport-local passport-kakao bcrypt 
+
+
+
+
+localStrategy
+const result = await bcrypt.compare(password,exUser.password); 안되는 이유 
