@@ -47,20 +47,17 @@ app.use(sessionMiddleware);
 app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
-/*
-app.use((req, res, next) => {
-  if (!req.session.color) {
-         //sessoinData 
-         //세션 데이터가 비어 있으면 넣어라... 
 
-    const colorHash = new ColorHash();
-    req.session.color = colorHash.hex(req.sessionID);
-    //사용자 아이디처럼 사용합니다. 
-    
-  }
-  next();
+app.use((req, res, next) => {
+
+    if(req.isAuthenticated()){
+        req.session.color = req.user; 
+    }else{
+        req.session.color={email:'',nick:''};  
+    }
+next(); 
 });
-*/
+
 app.use('/', indexRouter);
 app.use('/auth',authRouter);
 app.use('/page',pageRouter);  

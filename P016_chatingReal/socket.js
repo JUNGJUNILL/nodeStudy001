@@ -56,11 +56,12 @@ module.exports = (server, app, sessionMiddleware) => {
     //Socket.IO에는 네임스페이스보다 더 세부적인 개념으로 방(Room)이라는 것이 
     //있습니다. 같은 네임스페이스 안에서도 같은 방에 들어 있는 소켓끼리만 데이터를 
     //주고받을 수 있습니다. 
-
+    const obj = req.session.color; 
+    console.log('obj-> ' , obj);
     socket.to(roomId).emit('join', {
             //to메서드로 특정 방(roomId)에 데이터를 보낼 수 있다.
       user: 'system',
-      chat: `${req.user.email}님이 입장하셨습니다.`,
+      chat: `${obj.email}님이 입장하셨습니다.`,
                 //세션 미들웨어와 Socket.IO를 연결했으므로 
                 //req.session.color 사용 가능 
     });
@@ -82,7 +83,7 @@ module.exports = (server, app, sessionMiddleware) => {
       } else {
         socket.to(roomId).emit('exit', {
           user: 'system',
-          chat: `${req.user.email}님이 퇴장하셨습니다.`,
+          chat: `${req.session.color}님이 퇴장하셨습니다.`,
         });
       }
 //----------------------------------------------------------------

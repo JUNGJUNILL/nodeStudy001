@@ -16,3 +16,10 @@ npm i passport passport-local passport-kakao bcrypt
 
 localStrategy
 const result = await bcrypt.compare(password,exUser.password); 안되는 이유 
+
+
+obj->  undefined
+D:\git Repository\nodeStudy001\P016_chatingReal\socket.js:64
+      chat: `${obj.email}님이 입장하셨습니다.`,
+                   ^
+    undefined 뜨는 이유를 밝혀야 한다. 

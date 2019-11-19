@@ -1,3 +1,6 @@
-const url = require('url'); 
-const urlString='/login?name=123'; 
-console.log(url.parse('www.naver.com')); 
+const obj = {email:'dala1207@naver.com'}; 
+
+console.log(typeof obj)
+console.log(obj)
+console.log(typeof obj.email);
+console.log(obj.email);
