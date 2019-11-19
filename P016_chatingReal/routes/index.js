@@ -7,17 +7,29 @@ const {isLoggedIn,isNotLoggedIn} = require('./middlewares');
 const router = express.Router();
 
 
-router.get('/',isNotLoggedIn,(req,res,next)=>{
+
+router.get('/',(req,res,next)=>{
 
 
-  res.render('layout02',{
-    user: req.user, 
+    let userInfo; 
+
+    if(req.isAuthenticated()){
+
+      userInfo = req.user; 
+
+    }else{
+
+      userInfo = null; 
+    }
+
+  res.render('layout03',{
+    user:userInfo,
   });
 
 }); 
 
 
-router.get('/test', async (req, res, next) => {
+router.get('/createChatRoom', async (req, res, next) => {
   try {
     const rooms = await Room.find({});
     res.render('main', { rooms, title: 'GIF 채팅방', error: req.flash('roomError') });
@@ -27,17 +39,19 @@ router.get('/test', async (req, res, next) => {
   }
 });
 
-//채팅방 생성 요청 
+//채팅방 생성 화면 
 router.get('/room', (req, res) => {
   res.render('room', { title: 'GIF 채팅방 생성' });
 });
 
+
+//채팅방 CREATE 
 router.post('/room', async (req, res, next) => {
   try {
     const room = new Room({
       title: req.body.title,
       max: req.body.max,
-      owner: req.session.color,
+      owner: req.user.email,
       password: req.body.password,
     });
     const newRoom = await room.save(); // insert 
@@ -68,7 +82,7 @@ router.get('/room/:id', async (req, res, next) => {
       return res.redirect('/');
     }
 
-    const chats = await Chat.find({roo:room._id}).sort('createdAt'); 
+    const chats = await Chat.find({room:room._id}).sort('createdAt'); 
     //먼저 GET /room/:id 라우터에서 방 접속 시 기존 채팅 내역을 불러오도록 수정합니다.
     //방 접속 시 DB로부터 채팅 내역을 가져오고, 
     //접속 후에는 웹 소켓으로 새로운 채팅 메시지를 받습니다.  
@@ -77,7 +91,7 @@ router.get('/room/:id', async (req, res, next) => {
       room,
       title: room.title,
       chats,
-      user: req.session.color,
+      user: req.user.email,
     });
   } catch (error) {
     console.error(error);
@@ -90,7 +104,7 @@ router.post('/room/:id/chat', async (req, res, next) => {
   try {
     const chat = new Chat({
       room: req.params.id,
-      user: req.session.color,
+      user: req.user.email,
       chat: req.body.chat,
     });
     await chat.save();

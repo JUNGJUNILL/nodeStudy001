@@ -32,6 +32,7 @@ module.exports = (server, app, sessionMiddleware) => {
   });
 
   room.on('connection', (socket) => {
+                         //▲컨넥션에 성공했을 때 컨녁션에 대한 정보를 담고 있는 변수 
   //네임스페이스 마다 각각 이벤트 리스너를 붙일 수 있다. 
 
 
@@ -59,7 +60,7 @@ module.exports = (server, app, sessionMiddleware) => {
     socket.to(roomId).emit('join', {
             //to메서드로 특정 방(roomId)에 데이터를 보낼 수 있다.
       user: 'system',
-      chat: `${req.session.color}님이 입장하셨습니다.`,
+      chat: `${req.user.email}님이 입장하셨습니다.`,
                 //세션 미들웨어와 Socket.IO를 연결했으므로 
                 //req.session.color 사용 가능 
     });
@@ -81,7 +82,7 @@ module.exports = (server, app, sessionMiddleware) => {
       } else {
         socket.to(roomId).emit('exit', {
           user: 'system',
-          chat: `${req.session.color}님이 퇴장하셨습니다.`,
+          chat: `${req.user.email}님이 퇴장하셨습니다.`,
         });
       }
 //----------------------------------------------------------------

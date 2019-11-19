@@ -93,6 +93,16 @@ router.post('/login',isNotLoggedIn,(req,res,next)=>{
 
 }); 
 
+//로그아웃 라우터 
+router.get('/logout',isLoggedIn,(req,res)=>{
+
+    req.logout(); 
+    req.session.destroy(); 
+    res.redirect('/'); 
+
+});
+
+
 
 
 module.exports = router;

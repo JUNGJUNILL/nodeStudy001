@@ -29,28 +29,17 @@ module.exports=(passport)=>{
             //const exUser =  await User.findOne({where:{email}}).select('email');
             //const exUser =  await User.find().where('email').equals('dala1207@naver.com');  
             //const exUser =  await User.find({name:"email"});  
-            const exUser =  await User.findOne({email:email},{email:1,nick:1,partCode:1});  
+            const exUser =  await User.findOne({email:email},{email:1,nick:1,partCode:1,password:1});  
             if(exUser){
-                //const result = await bcrypt.compare(password,exUser.password); 
-                /*await bcrypt.compare(password,exUser.partCode,(err,res)=>{
-                   if(res){
-                    done(null,exUser); 
-                   }else{
-                    done(null,false,{message:'비밀번호가 일치하지 않습니다.'})
-                   }
-                }); */
-                if(password === exUser.partCode){
-                    done(null,exUser); 
-                }else{
-                    done(null,false,{message:'비밀번호가 일치하지 않습니다.'})
-                }
+                const result = await bcrypt.compare(password,exUser.password); 
+              
 
-                /*if(result){
+                if(result){
                     done(null,exUser); 
                 }else{
                     done(null,false,{message:'비밀번호가 일치하지 않습니다.'})
                 }
-                */
+                
 
             }else{
                 
