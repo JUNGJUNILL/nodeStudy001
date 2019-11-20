@@ -29,7 +29,6 @@ module.exports = (passport)=>{
         User.findOne({email:email},{_id:0,email:1,nick:1})
         .then(user=>{done(null,user)
         console.log('deserializeUser user   ====>   ',user);  
-        console.log('user.email :  ' , user.email);  
         })
                               //▲해당 아이디에 상응하는 select 데이터를 
                               //user에 저장하고 이것은 req.user에 저장된다. 

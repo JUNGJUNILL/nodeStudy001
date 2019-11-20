@@ -1,5 +1,6 @@
 const SocketIO = require('socket.io');
 const axios = require('axios');
+const Room = require('./schemas/room');
 
 module.exports = (server, app, sessionMiddleware) => {
   const io = SocketIO(server, { path: '/socket.io' });
@@ -26,7 +27,7 @@ module.exports = (server, app, sessionMiddleware) => {
     //io.use 메서드에 미들웨어를 장착할 수 있다. 
     //이 부분은 모든 웹 소켓 연결 시마다 실행된다. 
 
-    sessionMiddleware(socket.request, socket.request.res, next);
+    sessionMiddleware(socket.request, socket.request.res,next);
     //세션 미들웨어에 요청,응답,next함수를 일자로 넣어주면 된다. 
 
   });
@@ -49,6 +50,7 @@ module.exports = (server, app, sessionMiddleware) => {
     const roomId = referer
       .split('/')[referer.split('/').length - 1]
       .replace(/\?.+/, '');
+      console.log('roomId ->  ' , roomId);
       //socket.request.headers.referer를 통해 현재 웹 페이지의 URL을 가져 올 수 있다. 
       //URL에서 방 아이디 부분을 추출하였다. 
 
@@ -56,15 +58,42 @@ module.exports = (server, app, sessionMiddleware) => {
     //Socket.IO에는 네임스페이스보다 더 세부적인 개념으로 방(Room)이라는 것이 
     //있습니다. 같은 네임스페이스 안에서도 같은 방에 들어 있는 소켓끼리만 데이터를 
     //주고받을 수 있습니다. 
-    const obj = req.session.color; 
-    console.log('obj-> ' , obj);
+  
+    let userInfoEmail=''
+    let userInfoNick='' 
+    let owner=''; 
+    const sessioninfo = req.session.clientInfo;
+    
+    if(sessioninfo){//세션에 유저 정보가 있으면
+
+      userInfoEmail = sessioninfo.email;
+      userInfoNick = sessioninfo.nick; 
+      
+      //해당 사용자가 방장인지 아닌지 검증
+      const isOwner = Room.findOne({owner:userInfoEmail},{_id:0,email:1}); 
+    
+      if(isOwner){
+        owner='[방장]';
+      }else{
+        owner=null; 
+      }
+
+    }
+
+    console.log('sessioninfo ->  ' , sessioninfo);
+    console.log('owner -->  ' , owner);
+
+
     socket.to(roomId).emit('join', {
             //to메서드로 특정 방(roomId)에 데이터를 보낼 수 있다.
       user: 'system',
-      chat: `${obj.email}님이 입장하셨습니다.`,
+      chat: `${userInfoNick}님이 입장하셨습니다.`,
                 //세션 미들웨어와 Socket.IO를 연결했으므로 
                 //req.session.color 사용 가능 
+      onwer : owner,
     });
+
+
     socket.on('disconnect', () => {
       console.log('chat 네임스페이스 접속 해제');
       socket.leave(roomId);
@@ -72,7 +101,7 @@ module.exports = (server, app, sessionMiddleware) => {
 //----------------------------------------------------------------
       const currentRoom = socket.adapter.rooms[roomId];
       const userCount = currentRoom ? currentRoom.length : 0;
-      if (userCount === 0) {
+      if (userCount === 0) { //방을 폭파시킬거야 
         axios.delete(`http://localhost:8005/room/${roomId}`)
           .then(() => {
             console.log('방 제거 요청 성공');
@@ -80,13 +109,15 @@ module.exports = (server, app, sessionMiddleware) => {
           .catch((error) => {
             console.error(error);
           });
-      } else {
+      } else {               //방은 남겨둘거야
         socket.to(roomId).emit('exit', {
           user: 'system',
-          chat: `${req.session.color}님이 퇴장하셨습니다.`,
+          chat: `${userInfoNick}님이 퇴장하셨습니다.`,
         });
       }
 //----------------------------------------------------------------
     });
+
+
   });
 };

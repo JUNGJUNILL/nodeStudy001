@@ -110,7 +110,7 @@ router.post('/room/:id/chat', async (req, res, next) => {
     await chat.save();
     req.app.get('io').of('/chat').to(req.params.id).emit('chat', chat);
     //채팅을 데이터베이스에 저장한 후 req.params.id(방 아이디) 같은 방에 있는
-    //소켓들에게 메시지 데이터를 전송합니다.
+    //소켓들에게'만' 메시지 데이터를 전송합니다.
 
     res.send('ok');
   } catch (error) {
