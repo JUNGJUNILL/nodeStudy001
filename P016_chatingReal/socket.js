@@ -32,6 +32,9 @@ module.exports = (server, app, sessionMiddleware) => {
 
   });
 
+
+
+ //----------------------start 방 socket---------------------- 
   room.on('connection', (socket) => {
                          //▲컨넥션에 성공했을 때 컨녁션에 대한 정보를 담고 있는 변수 
   //네임스페이스 마다 각각 이벤트 리스너를 붙일 수 있다. 
@@ -42,15 +45,17 @@ module.exports = (server, app, sessionMiddleware) => {
       console.log('room 네임스페이스 접속 해제');
     });
   });
+//----------------------end  방 socket---------------------- 
 
-  chat.on('connection', (socket) => {
+
+
+  chat.on('connection', async (socket) => {
     console.log('chat 네임스페이스에 접속');
     const req = socket.request;
     const { headers: { referer } } = req;
     const roomId = referer
       .split('/')[referer.split('/').length - 1]
       .replace(/\?.+/, '');
-      console.log('roomId ->  ' , roomId);
       //socket.request.headers.referer를 통해 현재 웹 페이지의 URL을 가져 올 수 있다. 
       //URL에서 방 아이디 부분을 추출하였다. 
 
@@ -70,8 +75,7 @@ module.exports = (server, app, sessionMiddleware) => {
       userInfoNick = sessioninfo.nick; 
       
       //해당 사용자가 방장인지 아닌지 검증
-      const isOwner = Room.findOne({owner:userInfoEmail},{_id:0,email:1}); 
-    
+      const isOwner = await Room.findOne({owner:userInfoEmail},{_id:0,email:1}); 
       if(isOwner){
         owner='[방장]';
       }else{
@@ -79,10 +83,6 @@ module.exports = (server, app, sessionMiddleware) => {
       }
 
     }
-
-    console.log('sessioninfo ->  ' , sessioninfo);
-    console.log('owner -->  ' , owner);
-
 
     socket.to(roomId).emit('join', {
             //to메서드로 특정 방(roomId)에 데이터를 보낼 수 있다.
@@ -100,6 +100,7 @@ module.exports = (server, app, sessionMiddleware) => {
 
 //----------------------------------------------------------------
       const currentRoom = socket.adapter.rooms[roomId];
+      console.log('currentRoom -->  ' , currentRoom);
       const userCount = currentRoom ? currentRoom.length : 0;
       if (userCount === 0) { //방을 폭파시킬거야 
         axios.delete(`http://localhost:8005/room/${roomId}`)

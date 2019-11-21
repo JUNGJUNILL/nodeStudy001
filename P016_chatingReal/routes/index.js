@@ -56,8 +56,10 @@ router.post('/room', async (req, res, next) => {
     });
     const newRoom = await room.save(); // insert 
     const io = req.app.get('io');
-    io.of('/room').emit('newRoom', newRoom);
+    io.of('/room')
     res.redirect(`/room/${newRoom._id}?password=${req.body.password}`);
+    //방을 생성하면 바로 방으로 들어가진다. room/:id 라우터를 탄다. 
+
   } catch (error) {
     console.error(error);
     next(error);
@@ -77,6 +79,7 @@ router.get('/room/:id', async (req, res, next) => {
       return res.redirect('/');
     }
     const { rooms } = io.of('/chat').adapter;
+    console.log('{ rooms }   --->  ' , rooms); 
     if (rooms && rooms[req.params.id] && room.max <= rooms[req.params.id].length) {
       req.flash('roomError', '허용 인원이 초과하였습니다.');
       return res.redirect('/');
