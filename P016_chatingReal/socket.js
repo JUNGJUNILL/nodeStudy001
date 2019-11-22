@@ -39,7 +39,7 @@ module.exports = (server, app, sessionMiddleware) => {
                          //▲컨넥션에 성공했을 때 컨녁션에 대한 정보를 담고 있는 변수 
   //네임스페이스 마다 각각 이벤트 리스너를 붙일 수 있다. 
 
-
+    socket.join('hello'); 
     console.log('room 네임스페이스에 접속');
     socket.on('disconnect', () => {
       console.log('room 네임스페이스 접속 해제');

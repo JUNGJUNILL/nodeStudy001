@@ -1,5 +1,5 @@
 {
-  "name": "p016-chatingreal",
+  "name": "node-action",
   "version": "0.0.0",
   "private": true,
   "scripts": {
@@ -25,5 +25,10 @@
     "passport-local": "^1.0.0",
     "pug": "^2.0.4",
     "socket.io": "^2.3.0"
-  }
+  },
+  "main": "app.js",
+  "devDependencies": {},
+  "author": "MIT",
+  "license": "MIT",
+  "description": ""
 }

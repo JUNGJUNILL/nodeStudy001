@@ -1,0 +1,9 @@
+npm i -g sequelize-cli 
+npm install tedious sequelize
+sequelize init
+
+
+model inext.js 부터 시작... 
+    belongsTo
+    hasMany 메소드에 대한 정확한 이해... 
+    
