@@ -17,6 +17,10 @@ db.Auction      = require('./auction')(sequelize,Sequelize);
 db.Good.belongsTo(db.User,{as:'owner'});
 db.Good.belongsTo(db.User,{as:'sold'}); 
 
+db.User.hasMany(db.Auction); 
+db.Auction.belongsTo(db.User); 
 
+db.Good.hasMany(db.Auction); 
+db.Auction.belongsTo(db.Good); 
 
 module.exports = db;

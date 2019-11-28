@@ -1,0 +1,14 @@
+npm i flash
+npm i cookie-parser
+npm i dotenv 
+npm i express
+npm i express-session 
+npm i morgan
+npm i multer 
+npm i pug
+
+npm i -g sequelize-cli 
+npm install tedious sequelize
+sequelize init
+
+npm i passport passport-local bcrypt
