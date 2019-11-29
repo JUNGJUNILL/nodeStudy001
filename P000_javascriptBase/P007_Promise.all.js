@@ -53,6 +53,5 @@ stillConcurrent();
 
 
 
-const tt = require('./testmodule'); 
-
-tt.func('pram'); 
+//const tt = require('./testmodule'); 
+//tt.func('pram'); 

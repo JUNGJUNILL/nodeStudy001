@@ -5,10 +5,12 @@ const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const flash = require('connect-flash');
 const passport = require('passport');
+const sse = require('./sse'); 
+const webSocket = require('./socket'); 
 require('dotenv').config();
 
-const indexRouter = require('./routes/index'); 
-const authRouter =  require('./routes/auth'); 
+const indexRouter = require('./routes/index');
+const authRouter = require('./routes/auth');
 const { sequelize } = require('./models');
 const passportConfig = require('./passport');
 
@@ -17,14 +19,14 @@ sequelize.sync();
 passportConfig(passport);
 
 const sessionMiddleware = session({
-    resave: false,
-    saveUninitialized: false,
-    secret: process.env.COOKIE_SECRET,
-    cookie: {
-      httpOnly: true,
-      secure: false,
-    },
-  });
+  resave: false,
+  saveUninitialized: false,
+  secret: process.env.COOKIE_SECRET,
+  cookie: {
+    httpOnly: true,
+    secure: false,
+  },
+});
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
@@ -41,8 +43,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
 
-
-app.use('/', pageRouter);
+app.use('/', indexRouter);
 app.use('/auth', authRouter);
 
 app.use((req, res, next) => {
@@ -58,6 +59,9 @@ app.use((err, req, res, next) => {
   res.render('error');
 });
 
-app.listen(app.get('port'), () => {
+const server = app.listen(app.get('port'), () => {
   console.log(app.get('port'), '번 포트에서 대기중');
 });
+
+webSocket(server,app); 
+sse(server); 

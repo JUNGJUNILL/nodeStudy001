@@ -12,3 +12,7 @@ npm install tedious sequelize
 sequelize init
 
 npm i passport passport-local bcrypt
+
+
+npm i sse socket.io
+sse(서버센트 이벤트)
