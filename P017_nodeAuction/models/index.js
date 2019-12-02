@@ -15,7 +15,7 @@ db.Auction      = require('./auction')(sequelize,Sequelize);
 
 
 db.Good.belongsTo(db.User,{as:'owner'}); //actiongoods에 onwerId 라는 컬럼 추가됨 
-db.Good.belongsTo(db.User,{as:'sold'});  //actiongoods에 sold    라는 컬럼 추가됨 
+db.Good.belongsTo(db.User,{as:'sold'});  //actiongoods에 soldId  라는 컬럼 추가됨 
 /*
 actiongoods ownerId <-> fk actionusers id 
 actiongoods soldId  <-> fk actionusers  id 
@@ -31,7 +31,8 @@ db.Good.hasMany(db.Auction);     //1(Good) : M 구조
 db.Auction.belongsTo(db.Good);   //M(Auction) : 1 구조 
 
 /*
-auction -> id(pk)  <-> fk actionusers id 
+auction -> actionuserId 
+           actiongoodId   <-> fk actionusers id 
 db.User.hasMany(db.Auction);     //1 : M 구조 
 db.Auction.belongsTo(db.User);   // M : 1 구조 
   

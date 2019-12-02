@@ -20,11 +20,18 @@ block content
   script(src='https://cdnjs.cloudflare.com/ajax/libs/event-source-polyfill/0.0.9/eventsource.min.js')
   script.
     var es = new EventSource('/sse');
+
     es.onmessage = function (e) {
+
       document.querySelectorAll('.time').forEach(function(td) {
         var end = new Date(td.dataset.start);
-        var server = new Date(parseInt(e.data, 10));
+      
+       
+        var server = new Date(parseInt(e.data, 10));//현재 실시간 서버 시간
+                                       //▲서버로부터 데이터를 받은 데이터가 들어있음 
+     
         end.setDate(end.getDate() + 1);
+        console.log('end ---->' , end);
         if (server >= end) {
           return td.textContent = '00:00:00';
         } else {
@@ -34,5 +41,8 @@ block content
           var hours = ('0' + Math.floor((t / (1000 * 60 * 60)) % 24)).slice(-2);
           return td.textContent = hours + ':' + minutes + ':' + seconds ;
         }
+
       });
+
+
     };

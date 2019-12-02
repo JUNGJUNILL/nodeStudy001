@@ -65,17 +65,11 @@ router.post('/login',isNotLoggedIn,(req,res,next)=>{
 });
 
 
-router.get('/logout' , isLoggedIn, (req,res)=>{
-
-    if(req.isAuthenticated()){
-        next(); 
-    }else{
-        req.flash('loginError','로그인이 필요합니다.'); 
-        req.redirect('/'); 
-    }
-
-
-}); 
+router.get('/logout', isLoggedIn, (req, res) => {
+    req.logout();
+    req.session.destroy();
+    res.redirect('/');
+  });
 
 
 module.exports = router; 

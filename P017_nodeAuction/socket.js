@@ -1,24 +1,35 @@
-const io = require('socket.io')(server,{path:'/socket.io'}); 
+const SocketIO = require('socket.io')
 
-app.set('io',io);
 
-io.on('connection',(socket)=>{
+module.exports = (server,app)=>{
 
-    const req = socket.request;
-    const { headers: { referer } } = req;
-    const roomId = referer.split('/')[referer.split('/').length - 1]
-    //socket.request.headers.referer를 통해 현재 웹 페이지의 URL을 가져 올 수 있다. 
+    const io = SocketIO(server,{path:'/socket.io'}); 
 
-    socket.join(roomId); 
-    //클라이언트 연결 시 주소로부터 경매방 아이디를 받아와
-    //socket.join으로 해당 방에 입장합니다. 연결이 끊겼다면
-    // socket.leave로 해당 방을 나갑니다. 
+    app.set('io',io);
 
     
+    io.on('connection',(socket)=>{
 
-    socket.on('disconnection',()=>{
+        const req = socket.request;
+        const { headers: { referer } } = req;
+        const roomId = referer.split('/')[referer.split('/').length - 1]
+        //socket.request.headers.referer를 통해 현재 웹 페이지의 URL을 가져 올 수 있다. 
 
-        socket.leave(roomId); 
-    }); 
+        
+        socket.join(roomId); 
+        //클라이언트 연결 시 주소로부터 경매방 아이디를 받아와
+        //socket.join으로 해당 방에 입장합니다. 연결이 끊겼다면
+        // socket.leave로 해당 방을 나갑니다. 
 
-})
+        
+
+        socket.on('disconnection',()=>{
+
+            socket.leave(roomId); 
+        }); 
+
+
+
+    });
+
+}

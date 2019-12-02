@@ -12,7 +12,7 @@ block content
     #bid
       for bid in auction
         div
-          span= bid.user.nick + '님: '
+          span= bid.actionuser.nick + '님: '
           strong= bid.bid + '원에 입찰하셨습니다.'
           if bid.msg
             span= '(' + bid.msg + ')'

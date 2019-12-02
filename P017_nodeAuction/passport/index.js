@@ -37,7 +37,6 @@ passport.deserializeUser((id,done)=>{
         .catch(err => done(err));
 
 
-
 }); 
 
 local(passport); 
