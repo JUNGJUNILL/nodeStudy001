@@ -8,7 +8,7 @@ app.use('/',indexRouter);
 
 
 const server = app.listen(8007,()=>{
-  console.log('listening 8006 Port'); 
+  console.log('listening 8007 Port'); 
 })
 
 webSocket(server); 

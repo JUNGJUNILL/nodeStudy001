@@ -88,8 +88,7 @@ const upload = multer({
   });
 
 
-  
-router.post('/good', isLoggedIn, upload.single('img'), async (req, res, next) => {
+  router.post('/good', isLoggedIn, upload.single('img'), async (req, res, next) => {
     try {
       const { name, price } = req.body;
       const good = await Good.create({
@@ -98,28 +97,26 @@ router.post('/good', isLoggedIn, upload.single('img'), async (req, res, next) =>
         img: req.file.filename,
         price,
       });
-
-      const end = new Date(); 
-      end.setDate(end.Date()+1); //하루뒤...? 
-      schedule.scheduleJob(end, async ()=>{
+      const end = new Date();
+      end.setMinutes(end.getMinutes() + 1); // 하루 뒤
+      schedule.scheduleJob(end, async () => {
         const success = await Auction.findOne({
-                      where : {actiongoodId:good.id},
-                      order : [['bid','DESC']],
-
-        }); 
-
-        await Good.update({soldId:success.userId},{where:{id:good.id}}); 
-        await User.update({money:sequelize.literal(`money - ${success.bid}`)},{where:{id:success.userId}});  
-
-      }); 
-
+          where: { actiongoodId: good.id },
+          order: [['bid', 'DESC']],
+        });
+        await Good.update({ soldId: success.userId }, { where: { id: good.id } });
+        await User.update({
+          money: sequelize.literal(`money - ${success.bid}`),
+        }, {
+          where: { id: success.userId },
+        });
+      });
       res.redirect('/');
     } catch (error) {
       console.error(error);
       next(error);
     }
   });
-
 
   router.get('/good/:id', isLoggedIn, async (req, res, next) => {
     try {
@@ -163,8 +160,13 @@ router.post('/good/:id/bid', isLoggedIn, async (req, res, next) => {
     if (good.price > bid) { // 시작 가격보다 낮게 입찰하면
       return res.status(403).send('시작 가격보다 높게 입찰해야 합니다.');
     }
+    console.log('good.createdAt-->  ', good.createdAt);
+    console.log('new Date(good.createdAt).valueOf()-->  ',new Date(good.createdAt).valueOf()); 
+    console.log('new Date(good.createdAt).valueOf() + (24 * 60 * 60 * 1000) --> ' , new Date(good.createdAt).valueOf() + (24 * 60 * 60 * 1000) ); 
+    console.log('typeof -->' ,typeof (new Date(good.createdAt).valueOf() + (60 * 1000)) ); 
+
     // 경매 종료 시간이 지났으면
-    if (new Date(good.createdAt).valueOf() + (24 * 60 * 60 * 1000) < new Date()) {
+    if (new Date(good.createdAt).valueOf() + (1000*60) < new Date()) {
       return res.status(403).send('경매가 이미 종료되었습니다');
     }
     // 직전 입찰가와 현재 입찰가 비교
@@ -177,13 +179,14 @@ router.post('/good/:id/bid', isLoggedIn, async (req, res, next) => {
       actionuserId: req.user.id,
       actiongoodId: req.params.id,
     });
+
     req.app.get('io').to(req.params.id).emit('bid', {
       bid: result.bid,
       msg: result.msg,
       nick: req.user.nick,
     });
-    res.render('auction',{})
     return res.send('ok');
+
   } catch (error) {
     console.error(error);
     return next(error);
@@ -220,7 +223,45 @@ router.get('/list',isLoggedIn,async (req,res,next)=>{
 
 
 
+router.get('/final',async (req,res,next)=>{
 
+  try {
+    const yesterday = new Date();
+    yesterday.setMinutes(yesterday.getMinutes() - 1);
+    const gooddata = await Good.findOne({where:{soldId:null}}); 
+
+    const targets = await Good.findAll({
+      where: {
+        soldId: null,
+        createdAt: { lte: yesterday }, //이하... 
+      },
+    });
+    console.log('yesterday --> ' , yesterday); 
+    console.log('gooddata.createdAt --> ' ,gooddata.createdAt ); 
+    console.log('targets--> ' , targets);
+   
+    targets.forEach(async (target) => {
+      console.log('target--> ' , target); 
+      const success = await Auction.findOne({
+        where: { actiongoodId: target.id },
+        order: [['bid', 'DESC']],
+      });
+      await Good.update({ soldId: success.actionuserId }, { where: { id: target.id } });
+      await User.update({
+        money: sequelize.literal(`money - ${success.bid}`),
+      }, {
+        where: { id: success.actionuserId },
+      });
+    });
+
+   res.redirect('/'); 
+
+  } catch (error) {
+    console.error(error);
+  }
+
+
+});
 
 
 

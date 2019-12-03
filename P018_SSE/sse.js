@@ -7,6 +7,8 @@
 //그러나 다행이 EventSource를 사용자가 직접 구현할 수 있다.   
 //script(src='https://cdnjs.cloudflare.com/ajax/libs/event-source-polyfill/0.0.9/eventsource.min.js')
 
+
+//안정적으로 서버 정보를 client에게 동일하게 전송 할 수 있다. 
 const SSE = require('sse'); 
 
 module.exports = (server)=>{
@@ -17,7 +19,7 @@ module.exports = (server)=>{
 
         setInterval(()=>{
             client.send(new Date().valueOf().toString()); //문자열만 보낼 수 있어서 toString()
-        },1000)
+        },3000)
     });
 };
 

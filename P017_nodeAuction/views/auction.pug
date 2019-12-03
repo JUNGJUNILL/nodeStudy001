@@ -53,7 +53,8 @@ block content
     es.onmessage = function (e) {
       var end = new Date(time.dataset.start);
       var server = new Date(parseInt(e.data, 10));
-      end.setDate(end.getDate() + 1);
+     // end.setDate(end.getDate() + 1);
+     end.setMinutes(end.getMinutes()+1); 
       if (server >= end) {
         return time.textContent = '00:00:00';
       } else {
