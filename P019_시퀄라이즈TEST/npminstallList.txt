@@ -1,0 +1,6 @@
+express && npm i 
+
+
+npm i -g sequelize-cli 
+npm install tedious sequelize
+sequelize init

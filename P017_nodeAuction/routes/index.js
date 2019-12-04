@@ -233,11 +233,21 @@ router.get('/final',async (req,res,next)=>{
     const targets = await Good.findAll({
       where: {
         soldId: null,
-        createdAt: { lte: yesterday }, //이하... 
+        createdAt: {$lte: yesterday }, //이하... <=
       },
     });
+
+
     console.log('yesterday --> ' , yesterday); 
     console.log('gooddata.createdAt --> ' ,gooddata.createdAt ); 
+
+    const yesterday01 = new Date(yesterday); 
+    const dbDate      = new Date(gooddata.createdAt); 
+    console.log('yesterday01->  ',yesterday01, " :  ","dbDate->  " , dbDate); 
+
+
+
+
     console.log('targets--> ' , targets);
    
     targets.forEach(async (target) => {
@@ -246,6 +256,7 @@ router.get('/final',async (req,res,next)=>{
         where: { actiongoodId: target.id },
         order: [['bid', 'DESC']],
       });
+      console.log('success-> ' , success); 
       await Good.update({ soldId: success.actionuserId }, { where: { id: target.id } });
       await User.update({
         money: sequelize.literal(`money - ${success.bid}`),
