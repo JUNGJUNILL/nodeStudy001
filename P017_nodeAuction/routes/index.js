@@ -3,6 +3,9 @@ const multer = require('multer');
 const path   = require('path'); 
 const fs     = require('fs'); 
 const schedule = require('node-schedule'); 
+const Sequelize = require('sequelize');
+const Op = Sequelize.Op;
+
 
 
 const {Good, Auction, User, sequelize} = require('../models'); 
@@ -98,7 +101,7 @@ const upload = multer({
         price,
       });
       const end = new Date();
-      end.setMinutes(end.getMinutes() + 1); // 하루 뒤
+      end.setMinutes(end.getMinutes() + 1); // 1분 뒤
       schedule.scheduleJob(end, async () => {
         const success = await Auction.findOne({
           where: { actiongoodId: good.id },
@@ -162,7 +165,7 @@ router.post('/good/:id/bid', isLoggedIn, async (req, res, next) => {
     }
     console.log('good.createdAt-->  ', good.createdAt);
     console.log('new Date(good.createdAt).valueOf()-->  ',new Date(good.createdAt).valueOf()); 
-    console.log('new Date(good.createdAt).valueOf() + (24 * 60 * 60 * 1000) --> ' , new Date(good.createdAt).valueOf() + (24 * 60 * 60 * 1000) ); 
+    console.log('new Date(good.createdAt).valueOf() + (60 * 1000) --> ' , new Date(good.createdAt).valueOf() + (24 * 60 * 60 * 1000) ); 
     console.log('typeof -->' ,typeof (new Date(good.createdAt).valueOf() + (60 * 1000)) ); 
 
     // 경매 종료 시간이 지났으면
@@ -233,27 +236,15 @@ router.get('/final',async (req,res,next)=>{
     const targets = await Good.findAll({
       where: {
         soldId: null,
-        createdAt: {$lte: yesterday }, //이하... <=
+        createdAt: {[Op.lte]: yesterday }, //이하... <=
       },
     });
 
 
-    console.log('yesterday --> ' , yesterday); 
-    console.log('gooddata.createdAt --> ' ,gooddata.createdAt ); 
-
-    const yesterday01 = new Date(yesterday); 
-    const dbDate      = new Date(gooddata.createdAt); 
-    console.log('yesterday01->  ',yesterday01, " :  ","dbDate->  " , dbDate); 
-
-
-
-
-    console.log('targets--> ' , targets);
-   
     targets.forEach(async (target) => {
       console.log('target--> ' , target); 
       const success = await Auction.findOne({
-        where: { actiongoodId: target.id },
+                                             where: { actiongoodId: target.id },
         order: [['bid', 'DESC']],
       });
       console.log('success-> ' , success); 

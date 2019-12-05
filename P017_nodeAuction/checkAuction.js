@@ -1,4 +1,7 @@
 const { Good, Auction, User, sequelize } = require('./models');
+const Sequelize = require('sequelize');
+const Op = Sequelize.Op;
+
 
 module.exports = async () => {
   try {
@@ -7,7 +10,7 @@ module.exports = async () => {
     const targets = await Good.findAll({
       where: {
         soldId: null,
-        createdAt: { $lte: yesterday }, //이하... 
+        createdAt: { [Op.lte]: yesterday }, //이하... 
       },
     });
     targets.forEach(async (target) => {

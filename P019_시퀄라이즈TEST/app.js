@@ -5,7 +5,8 @@ const { sequelize } = require('./models');
 sequelize.sync();
 
 app.use('/',indexRouter);
-app.set('view engine', 'jade');
+app.set('views', __dirname + '/views');
+app.set('view engine', 'pug');
 
 const server = app.listen(8012,()=>{
   console.log('listening 8012 Port'); 

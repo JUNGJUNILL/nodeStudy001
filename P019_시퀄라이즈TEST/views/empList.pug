@@ -1,0 +1,30 @@
+doctype html
+html
+  head
+    meta(charset='utf-8')
+    title 시퀄라이저 select 테스터 
+    body
+     table#emp-list
+      thead
+        tr
+          th EMPNO
+          th ENAME
+          th JOB
+          th MGR
+          th HIREDATE
+          th SAL
+          th COMM
+          th DEPTNO
+          
+      tbody
+        for list in emplist
+          tr
+            td= list.EMPNO
+            td= list.ENAME
+            td= list.JOB
+            td= list.MGR
+            td= list.HIREDATE
+            td= list.SAL
+            td= list.COMM
+            td= list.DEPTNO
+            

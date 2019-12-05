@@ -19,3 +19,20 @@ sse(서버센트 이벤트)
 
 
 npm i node-schedule 
+
+프로젝트 리뷰
+일단 예제에서는 24시간 입찰이었는데, 
+내가 임의로 1분으로 바꿈(getMinutes()때매 삽질함)
+
+무슨 이유인지는 모르겠지만 
+app.js의 const checkAuction = require('./checkAuction');
+         checkAuction(); 
+가 먹질 않아 index.js에 '/final' 이라는 라우터를 추가해서 
+시간이되었을 때 강제로 입찰되게 함...(내가 url에다 localhost:8010/final 해야 한다는 소리)
+
+아직 adapter와 socket.io의 room개념을 잘 모르겠음.. 
+진짜로 필요한 서비스가 있을 때 정확히 이해가 될 수 도... 
+대~충은 알겠는데 정!확!히! 는 잘 모르겠다. 
+
+
+
