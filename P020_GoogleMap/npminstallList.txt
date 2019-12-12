@@ -1,0 +1,13 @@
+npm i axios
+npm i connect-flash
+npm i cookie-parser
+npm i dotenv 
+npm i express
+npm i express-session
+npm i mongoose
+npm i morgan
+npm i pug 
+npm i -D nodemon
+
+구글은 노드를 위한 API 모듈을 따로 제공한다. 
+npm i @google/maps

@@ -27,6 +27,7 @@ promise.then((message01)=>{
     console.log(message01); 
 
     return new Promise((resolve,reject)=>{
+        
 
         resolve(message01 +  ' 정 준 일 '); 
         //reject('test'); 
@@ -66,7 +67,7 @@ const p3 =new Promise((resolve,reject)=>{
 });
 
 
-Promise.all(p1,p2,p3).then(message=>{
+Promise.all([p1,p2,p3]).then(message=>{
     console.log('Give me a message-> :    ' , message); 
 })
 

@@ -1,0 +1,26 @@
+{
+  "name": "p020_googlemap",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon app"
+  },
+  "author": "JJI",
+  "license": "MIT",
+  "devDependencies": {
+    "nodemon": "^2.0.1"
+  },
+  "dependencies": {
+    "@google/maps": "^1.0.2",
+    "axios": "^0.19.0",
+    "connect-flash": "^0.1.1",
+    "cookie-parser": "^1.4.4",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-session": "^1.17.0",
+    "mongoose": "^5.7.13",
+    "morgan": "^1.9.1",
+    "pug": "^2.0.4"
+  }
+}
