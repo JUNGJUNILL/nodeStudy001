@@ -1,11 +1,16 @@
+
+//concat(array) 
+//return array 
 //기존 배열을 변경하지 않습니다.
 //추가된 새로운 배열을 반환합니다. 
+
 
 const array01 = ['a','b','c']; 
 const array02 = ['d','e','f']; 
 
 console.log(array01.concat(array02)); 
 console.log('-------------------'); 
+
 
 array01.concat(array02).map((v)=>{
     console.log(v); 
@@ -31,6 +36,7 @@ const information01= [
 
 
 console.log('-------------------'); 
+//enhancedObject 
 const state = {
     information: [
         {
