@@ -20,22 +20,10 @@ array01.concat(array02).map((v)=>{
 console.log('-------------------'); 
 console.log(array01.concat(1, [2, 3]));
 
-console.log('-------------------'); 
-const information01= [
-    {
-      id: 0,
-      name: '김민준',
-      phone: '010-0000-0000'
-    },
-    {
-      id: 1,
-      name: '홍길동',
-      phone: '010-0000-0001'
-    }
-  ]
-
 
 console.log('-------------------'); 
+
+
 //enhancedObject 
 const state = {
     information: [
@@ -52,6 +40,16 @@ const state = {
       ]
 }
 
-const {information} = state; 
-console.log(information); 
-console.log(JSON.stringify(information))
+const {information} = state
+information.map((v)=>console.log(v)); 
+
+
+
+console.log('-------------------'); 
+
+
+const arr = [1,2,3,4,5]; 
+console.log(arr.slice(0,2).concat(arr.slice(3,5))); 
+
+const spreadArray = [...arr.slice(0,2),...arr.slice(3,5)]; 
+console.log('spreadArray' , spreadArray)
