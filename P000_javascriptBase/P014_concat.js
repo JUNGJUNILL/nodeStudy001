@@ -41,9 +41,9 @@ const state = {
 }
 
 const {information} = state
+information : information.concat({id:3,name:"정준일",phone:"010"});
+
 information.map((v)=>console.log(v)); 
-
-
 
 console.log('-------------------'); 
 
@@ -51,5 +51,7 @@ console.log('-------------------');
 const arr = [1,2,3,4,5]; 
 console.log(arr.slice(0,2).concat(arr.slice(3,5))); 
 
+
+//배열 전개 연산자. 
 const spreadArray = [...arr.slice(0,2),...arr.slice(3,5)]; 
 console.log('spreadArray' , spreadArray)
