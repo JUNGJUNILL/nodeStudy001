@@ -1,21 +1,56 @@
-
 const array = [
     { id: 0, text: 'hello', tag: 'a' },
     { id: 1, text: 'world' , tag: 'b' },
     { id: 2, text: 'bye', tag: 'c' }
   ];
 
-  const modifiedArray = array.map(item => item.id === 1? ({ ...item, text: 'Korea' }) : item )
-  modifiedArray.map(v=>console.log(v)); 
 
-  const obj1 = { foo: 'bar', x: 42 };
-  const obj2 = { foo: 'baz', y: 13 };
-  const obj3 = { foo: 'helloWorld', y: 99, z:100 };
+const promise = new Promise((resolve,reject)=>{
 
-  const objtest = {...obj1,...obj2,...obj3}; 
-  console.log(objtest)
+  const updateData = {id:0,text:'good',tag:'b',sex:'fe'}
+  const updateResult = array.map(v=>v.id===updateData.id? {...v,...updateData}: v); 
+  resolve(updateResult);
+
+})
+
+promise.then((message)=>{
+
+  message.map((v)=>{
+    console.log(v); 
+  })
+
+      return new Promise((resolve,reject)=>{
+        
+        const modifiedArray = message.map((v)=>v.id===1?({...v,text:'KOREAN'}):v)
+        console.log('-----------------------------')
+        resolve(modifiedArray)
+      }); 
 
 
-  const merge = (...objects) => ({...objects}); 
-  const mergedObj = merge(obj1,obj2); 
-  console.log(mergedObj)
+}).then((message)=>{
+
+      message.map((v)=>{
+        console.log(v); 
+      })
+
+}
+
+).catch(error=>{
+
+      console.log(error); 
+
+})
+
+
+
+/*
+Object {id: 0, text: "good", tag: "b"}
+Object {id: 1, text: "world", tag: "b"}
+Object {id: 2, text: "bye", tag: "c"}
+*/
+
+
+const obj1 = {foo:'bar', x:42}; 
+const obj2 = {foo:'foo', y:13}; 
+
+const cloneObj = {...obj1,...obj2}

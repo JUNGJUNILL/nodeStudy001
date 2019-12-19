@@ -35,7 +35,7 @@ promise.then((message01)=>{
 
 }).then((message02)=>{
 
-    console.log(message02); 
+    console.log('message02==>',message02); 
 
     return new Promise((resolve,reject)=>{
 
