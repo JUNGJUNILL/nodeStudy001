@@ -7,7 +7,7 @@ const array = [
 
 const promise = new Promise((resolve,reject)=>{
 
-  const updateData = {id:0,text:'good',tag:'b',sex:'fe'}
+  const updateData = {id:0,text:'good',tag:'b',sex:'male'}
   const updateResult = array.map(v=>v.id===updateData.id? {...v,...updateData}: v); 
   resolve(updateResult);
 
