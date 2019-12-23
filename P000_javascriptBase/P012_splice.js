@@ -1,3 +1,5 @@
+//return 값 array 
+
 var myFish = ['angel', 'clown', 'drum', 'mandarin', 'sturgeon'];
 
 
