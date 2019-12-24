@@ -1,0 +1,11 @@
+npm i -g sequelize-cli 
+npm install tedious sequelize
+sequelize init 
+
+npm i express cookie-parser express-session morgan connect-flash pug
+(morgan -- 서버 코드에 수정 사항이 샐길 때마다 매번 서버를 재시작하기 귀찮으므로 nodemon 모듈로 서버를 자동 재시작합니다.
+        -- nodemon은 개발용으로만 사용할 것을 권장합니다.
+)
+
+npm i -g nodemon
+npm i -D nodemon
