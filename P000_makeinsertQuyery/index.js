@@ -3,8 +3,19 @@ fs.readFile(__dirname+'/good.txt','utf8',(err,data)=>{
 
     let array  = data.replace(/\r\n/g,',').split(',');
     
-   array.map((v)=>{
-       v = `'${v}',`
+   array.map((v,i)=>{
+    v = `'${v}'\n,`
+    try{
+
+        fs.appendFileSync('./P000_makeinsertQuyeryStorage/test.txt', v);
+           if(array.length-1 === i){
+               console.log('파일 생성이 완료되었습니다.'); 
+           }
+      
+    }catch(error){
+        console.error(error); 
+    }
+      
        console.log(v); 
    })
 
