@@ -9,3 +9,15 @@ npm i express cookie-parser express-session morgan connect-flash pug
 
 npm i -g nodemon
 npm i -D nodemon
+npm i dotenv  -- 비밀키 관리 .env파일 
+              -- dotenv가 .env 파일을 읽어 process.env 객체에 넣음 
+
+
+npm i passport passport-local passport-kakao bcrypt     --passport 
+              
+table List 
+    users
+    post 
+    posthashtags 
+    hashtags 
+    follows 

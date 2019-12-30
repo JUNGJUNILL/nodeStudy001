@@ -14,6 +14,7 @@ router.get('/emp', async (req,res,next)=>{
 
   console.log('emp'); 
   const empListAll = await Emp.findAll({
+                                //findAll -> SELECT * 
     where:{
      // [Op.or]:[{EMPNO:'1001'},{EMPNO:'1002'}] 
      //-> EMPNO='1001' or EMPNO='1002'
@@ -31,10 +32,9 @@ router.get('/emp', async (req,res,next)=>{
 
     }
   });    
-  res.render('empList', {
+  res.render('empList', 
+  {
     emplist:empListAll });
-  
-
 });
 
 

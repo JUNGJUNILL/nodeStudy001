@@ -1,26 +1,23 @@
 {
   "development": {
-    "username": "root",
-    "password": null,
-    "database": "database_development",
-    "host": "127.0.0.1",
-    "dialect": "mysql",
-    "operatorsAliases": false
+    "username": "sa",
+    "password": "hubmeka",
+    "database": "test123",
+    "host": "221.150.127.102",
+    "dialect": "mssql"
   },
   "test": {
-    "username": "root",
-    "password": null,
-    "database": "database_test",
-    "host": "127.0.0.1",
-    "dialect": "mysql",
-    "operatorsAliases": false
+    "username": "sa",
+    "password": "hubmeka",
+    "database": "test123",
+    "host": "221.150.127.102",
+    "dialect": "mssql"
   },
   "production": {
-    "username": "root",
-    "password": null,
-    "database": "database_production",
-    "host": "127.0.0.1",
-    "dialect": "mysql",
-    "operatorsAliases": false
+    "username": "sa",
+    "password": "hubmeka",
+    "database": "test123",
+    "host": "221.150.127.102",
+    "dialect": "mssql"
   }
 }
