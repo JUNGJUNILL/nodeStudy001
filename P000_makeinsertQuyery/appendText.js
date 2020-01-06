@@ -10,7 +10,7 @@ fs.readFile(__dirname+'/appentTextList.txt','utf8',(err,data)=>{
 
 
 
-fs.readFile(__dirname+'/materialNameList.txt','utf8',(err,data1)=>{
+fs.readFile(__dirname+'/appentTextMaterialNameList.txt','utf8',(err,data1)=>{
 
      let materialList = data1.replace(/\r\n/g,',').split(',');
 

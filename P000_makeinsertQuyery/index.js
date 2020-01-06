@@ -4,7 +4,7 @@ fs.readFile(__dirname+'/good.txt','utf8',(err,data)=>{
     let array  = data.replace(/\r\n/g,',').split(',');
     
    array.map((v,i)=>{
-    v = `'${v}'\n,`
+    v = `'${v}',\n`
     try{
 
         fs.appendFileSync('./P000_makeinsertQuyeryStorage/test.txt', v);
