@@ -4,12 +4,16 @@ const morgan = require('morgan');
 const path = require('path'); 
 const session = require('express-session'); 
 const flash = require('connect-flash'); 
+const passport = require('passport');   //passport 
 require('dotenv').config(); 
 
 const pageRouter = require('./routes/page'); 
-const { sequelize } =require('./models'); 
+const { sequelize } =require('./models');      //models-> index.js import , sequelize
+                                               //폴더 내의 index.js 파일은 require시 이름을 생략할 수 있다. 
+const passportConfig = require('./passport');  //passport 
 const app= express(); 
-sequelize.sync(); 
+sequelize.sync();          //sequelize
+passportConfig(passport);  //passport 
 
 app.set('views',path.join(__dirname,'views')); 
 app.set('view engine','pug'); 
@@ -60,6 +64,12 @@ app.use(session({
 
 }));
 app.use(flash()); 
+app.use(passport.initialize()); //passport 
+                                //req 객체에 passport설정을 심음
+
+app.use(passport.session());    //passport 
+                                //req.session 객체에 passport 정보를 저장 
+                                //passport -> index.js -> deserializeUser호출함 
 app.use('/',pageRouter); 
 app.use((req,res,next)=>{
     const err = new Error('Not Fount'); 
