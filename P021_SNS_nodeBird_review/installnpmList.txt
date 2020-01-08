@@ -14,7 +14,11 @@ npm i dotenv  -- 비밀키 관리 .env파일
 
 
 npm i passport passport-local passport-kakao bcrypt     --passport 
-              
+
+
+파일 업로드 
+npm i multer 
+
 table List 
     users
     post 

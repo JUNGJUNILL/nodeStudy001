@@ -13,7 +13,7 @@ router.post('/join',isNotLoggedIn,async (req,res,next)=>{
     const {email, nick, password} = req.body; 
     try{
 
-        const exUser = await User.find({where:{email}}); 
+        const exUser = await User.findOne({where:{email}}); 
         if(exUser){
             
             req.flash('joinError','이미 가입된 이메일입니다.'); 
@@ -84,5 +84,13 @@ router.get('/logout',isLoggedIn,(req,res)=>{
     res.redirect('/'); 
 }); 
 
+
+
+router.get('/kakao',passport.authenticate('kakao')); 
+router.get('/kakao/callback', passport.authenticate('kakao',{failureRedirect:'/'}),(req,res)=>{
+
+
+    res.redirect('/'); 
+}); 
 
 module.exports = router; 

@@ -8,6 +8,7 @@ const passport = require('passport');   //passport
 require('dotenv').config(); 
 
 const pageRouter = require('./routes/page'); 
+const authRouter = require('./routes/auth'); 
 const { sequelize } =require('./models');      //models-> index.js import , sequelize
                                                //폴더 내의 index.js 파일은 require시 이름을 생략할 수 있다. 
 const passportConfig = require('./passport');  //passport 
@@ -71,6 +72,7 @@ app.use(passport.session());    //passport
                                 //req.session 객체에 passport 정보를 저장 
                                 //passport -> index.js -> deserializeUser호출함 
 app.use('/',pageRouter); 
+app.use('/auth',authRouter); 
 app.use((req,res,next)=>{
     const err = new Error('Not Fount'); 
     err.status = 404;
