@@ -44,8 +44,7 @@ router.get('/', (req, res, next) => {
             user:req.user,
             loginError:req.flash('loginError'), 
         });
-      })
-      .catch((error)=>{
+      }).catch((error)=>{
         console.error(error); 
         next(error); 
       });

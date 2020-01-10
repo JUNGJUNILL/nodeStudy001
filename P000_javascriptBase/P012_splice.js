@@ -2,7 +2,6 @@
 
 var myFish = ['angel', 'clown', 'drum', 'mandarin', 'sturgeon'];
 
-
 console.log(myFish.splice(3,2)); //3번 index부터 2개 빼서 할당하겠다.  
                                  //splice(startIndex,deleteCount) 
 console.log(myFish);            

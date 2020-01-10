@@ -12,6 +12,8 @@ const authRouter = require('./routes/auth');
 const { sequelize } =require('./models');      //models-> index.js import , sequelize
                                                //폴더 내의 index.js 파일은 require시 이름을 생략할 수 있다. 
 const passportConfig = require('./passport');  //passport 
+const post            = require('./routes/post'); 
+
 const app= express(); 
 sequelize.sync();          //sequelize
 passportConfig(passport);  //passport 
@@ -73,18 +75,20 @@ app.use(passport.session());    //passport
                                 //passport -> index.js -> deserializeUser호출함 
 app.use('/',pageRouter); 
 app.use('/auth',authRouter); 
+app.use('/post',post); 
 app.use((req,res,next)=>{
     const err = new Error('Not Fount'); 
     err.status = 404;
     next(err); 
 }); 
 
-//에러처리 미들웨어 
+//에러처리 미들웨어(는 가장 마지막으로 정의해야 한다.)
 app.use((err,req,res)=>{
+    console.log('err==>' , err); 
     res.locals.message = err.message;
     res.locals.error   = req.app.get('env') === 'development'? err:{}; 
     res.status(err.status || 500); 
-    res.render('error'); 
+    res.render('error copy'); 
 }); 
 
 app.listen(app.get('port'),()=>{
