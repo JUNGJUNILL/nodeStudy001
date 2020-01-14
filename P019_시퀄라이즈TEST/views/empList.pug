@@ -15,6 +15,8 @@ html
           th SAL
           th COMM
           th DEPTNO
+          th LOC
+          td DNAME 
           
       tbody
         for list in emplist
@@ -27,4 +29,7 @@ html
             td= list.SAL
             td= list.COMM
             td= list.DEPTNO
+            td= list.dept.LOC
+            td= list.dept.DNAME
+            
             

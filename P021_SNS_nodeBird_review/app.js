@@ -9,6 +9,7 @@ require('dotenv').config();
 
 const pageRouter = require('./routes/page'); 
 const authRouter = require('./routes/auth'); 
+const userRouter = require('./routes/user'); 
 const { sequelize } =require('./models');      //models-> index.js import , sequelize
                                                //폴더 내의 index.js 파일은 require시 이름을 생략할 수 있다. 
 const passportConfig = require('./passport');  //passport 
@@ -23,6 +24,7 @@ app.set('view engine','pug');
 app.set('port',process.env.PORT || 8001); 
 app.use(morgan('dev'));
 app.use(express.static(path.join(__dirname,'public'))); 
+app.use('/img',express.static(path.join(__dirname,'uploads'))); 
 
 //----------------------------------------------------start body-parser
 app.use(express.json());                           
@@ -76,6 +78,7 @@ app.use(passport.session());    //passport
 app.use('/',pageRouter); 
 app.use('/auth',authRouter); 
 app.use('/post',post); 
+app.use('/user',userRouter); 
 app.use((req,res,next)=>{
     const err = new Error('Not Fount'); 
     err.status = 404;

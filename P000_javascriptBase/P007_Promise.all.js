@@ -52,6 +52,21 @@ const stillConcurrent = () =>{
 stillConcurrent(); 
 
 
+console.log('------------------------------------------'); 
 
-//const tt = require('./testmodule'); 
-//tt.func('pram'); 
+//Promise.all의 return 값은 배열 그 자체이고 
+//then 절에서 message[0], message[1], ... 처럼 각 배열의 요소를 선택 할 수 있다. 
+const testFunc = async ()=>{
+
+  const list=['a','b','c','d']; 
+
+  const  returnValue=  Promise.all(list.map((v)=>v)); 
+   
+      return returnValue;
+
+}
+const ttt = testFunc(); 
+ttt.then((message)=>console.log(message[0]))
+.catch((err)=>{
+  console.log(err); 
+}) 

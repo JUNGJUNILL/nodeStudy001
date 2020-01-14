@@ -21,7 +21,7 @@ npm i multer
 
 table List 
     users
-    post 
-    posthashtags 
+    posts
+    posthashtag
     hashtags 
     follows 
