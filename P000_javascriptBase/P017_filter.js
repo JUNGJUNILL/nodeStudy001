@@ -3,8 +3,13 @@
 
 //배열 요소중 글자 길이가 6글자보다 긴 것들만 리턴해라... 
 const words = ['spray', 'limit', 'elite', 'exuberant', 'destruction', 'present'];
-const result = words.filter(word => word.length > 6); 
-console.log(result);
+
+const result = words.filter(function(word,index,array){
+    if(word.length > 6){
+        return array; 
+    }
+}); 
+console.log('result',result);
 
 result.map((v)=>console.log(v.length)); 
 

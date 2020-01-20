@@ -22,8 +22,3 @@ console.log(arr2);
 
 // console.log(a); // 결과 : [0, 1, 5]
 // console.log(b); // 결과 : [2, 3, 4]
-
-
-const array = ['A','B','C','D']; 
-array.splice(1,2,'ee'); 
-console.log(array); 
