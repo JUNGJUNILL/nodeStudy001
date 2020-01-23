@@ -1,14 +1,14 @@
 const fs = require('fs'); 
 
 var list;
-fs.readFile(__dirname+'/list.txt','utf8',(err,data)=>{
+fs.readFile(__dirname+'/materialappendword.txt','utf8',(err,data)=>{
 
    list =data.replace(/\r\n/g,',').split(',');
  // console.log(list); 
 
 })
 
-fs.readFile(__dirname+'/good.txt','utf8',(err,data)=>{
+fs.readFile(__dirname+'/materialName.txt','utf8',(err,data)=>{
     let array  = data.replace(/\r\n/g,',').split(',');
     
 
@@ -27,7 +27,7 @@ fs.readFile(__dirname+'/good.txt','utf8',(err,data)=>{
         console.log(insert); 
         
       
-        fs.appendFileSync(__dirname+'/goodedit.txt',insert+'\n');
+        fs.appendFileSync(__dirname+'/materialNameEdit.txt',insert+'\n');
       })
         
         // array.map(v=>{
