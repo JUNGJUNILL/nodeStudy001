@@ -15,7 +15,7 @@ console.log('array === sameArray',array === sameArray);
 
 //불변성을 유지 했을 경우 
 const array01 = [1,2,3,4]; 
-const sameArray01 = [...array01,5]; 
+const sameArray01 = [...array01]; 
 console.log('array01 === sameArray01',array01 === sameArray01); //false 
 
 

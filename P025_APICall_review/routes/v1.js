@@ -77,5 +77,75 @@ router.get('/test', verifyToken, (req,res)=>{
 
 
 
+router.get('/posts/my',verifyToken,(req,res)=>{
+
+    Post.findAll({where:{userId:req.decoded.id}})
+        .then((posts)=>{
+            console.log('posts==>',posts);
+            res.json({
+                code:200,
+                playload:posts, 
+            });
+        })
+        .catch((error)=>{
+            console.error(error); 
+            return res.status(500).json({
+                code:500,
+                message:'서버 에러', 
+            });
+        });
+    });
+
+
+
+router.get('/posts/hashtag/:title',verifyToken,async(req,res)=>{
+
+    try{
+        console.log('req.params.title==>', req.params.title); 
+        const hashtag = await Hashtag.findOne({where:{title:req.params.title}}); 
+        if(!hashtag){
+            return res.status(404).json({
+                code:404,
+                message:'검색 결과가 없습니다.',
+            }); 
+        }
+        const posts = await hashtag.getPosts(); 
+        /*                          get메소드의 반환값은 [] 배열이다.
+      [{
+        "id":18,
+        "content":
+        "#배#수박#겨울#겨울왕국#올라프\r\n난 영화가 좋아요",
+        "img":"",
+        "createdAt":"2020-01-14T01:31:33.150Z",
+        "updatedAt":"2020-01-14T01:31:33.150Z",
+        "deletedAt":null,
+        "userId":3,
+
+        "PostHashtag":
+                        {"createdAt":"2020-01-14T01:31:33.295Z",
+                        "updatedAt":"2020-01-14T01:31:33.295Z",
+                        "postId":18,
+                        "hashtagId":29
+                        }		
+        }]     
+        */
+        
+        return res.json({
+                        code:200,
+                        playload:posts,
+                    
+            }); 
+
+    }catch(error){
+        console.error(error); 
+        return res.status(500).json({
+            code:500,
+            message:'서버 에러',
+        });
+    }
+
+}); 
+
+
 
 module.exports = router; 

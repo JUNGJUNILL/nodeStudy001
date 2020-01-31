@@ -29,7 +29,8 @@ exports.verifyToken = (req,res,next) =>{
 
     try{
     
-      req.decoded = jwt.verify(req.headers.authorization,process.env.JWT_SECRET); 
+      req.decoded = jwt.verify(req.headers.authorization,
+                               process.env.JWT_SECRET); 
       //jwt.verify(a,b)
       //a : 토큰, b : 토큰의 비밀 키 
       //요청 해더에 저장된 토큰(req.headers.authorization)을 사용한다. 
