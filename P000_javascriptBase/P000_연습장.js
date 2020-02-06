@@ -1,24 +1,51 @@
 
-// const filename= 'test.txt'; 
+function first(){
+    second();
+    console.log('첫번째')
 
-// let array = filename.split('.'); 
+}
 
-// array[0] = array[0]+'_';
-// array[1] = '.' + array[1]; 
+function second(){
+    third();
+    console.log('두번째')
+
+}
+
+function third(){
+    console.log('세번째')
+
+}
+
+first();
 
 
 
-var arr2 = ['A','B','C','D',];
-arr2.splice(1,0,"a"); 
-console.log(arr2);
+// function longTime(){
+
+//    // setTimeout(console.log('longTime'),3000); 
+//     console.log('작업 끝'); 
+// }
+
+// console.log('시작'); 
+// setTimeout(longTime,0);
+// console.log('다음 작업'); 
 
 
+function main() {
+    console.log('A'); 
+    setTimeout(function display(){console.log('B'),0}); 
+    runWhile(3); 
+    console.log('C'); 
+}
+main();
+function runWhile(sec){
 
-// // 일단 배열 만들고
-// var a = ['0', '1', '2', '3', '4', '5'];
-
-// // 2번 배열부터 3개 제거.
-// var b = a.splice(2, 3);
-
-// console.log(a); // 결과 : [0, 1, 5]
-// console.log(b); // 결과 : [2, 3, 4]
+    let start = Date.now(), now =start; 
+    console.log('start : ',start, ' now : ',now); 
+    console.log('now - start',now - start); 
+    while(now - start <(sec*1000)){
+      
+        now = Date.now(); 
+       
+    }
+}
