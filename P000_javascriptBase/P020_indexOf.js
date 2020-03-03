@@ -4,7 +4,7 @@ const text='12345';
 console.log(text.indexOf('')); 
             //''는 0을 반환하게 되어 있다. 
 
-if(text.indexOf("9") === -1){
+if(text.indexOf("9",0) === -1){
     console.log('존재하지 않는 문자열입니다.'); 
 
 }
