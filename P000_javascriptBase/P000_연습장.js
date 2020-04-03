@@ -8,15 +8,15 @@ const todos =  [
 
 const add = [...todos,{id:3, text: ' ' , checked:true}]
 
-//add.map((v)=>console.log(v,'헬로우')); 
+// add.map((v)=>console.log(v,'헬로우')); 
 
 
 
 const newArray = todos.concat({id:4,text:'씌발' , checked: true});
-// newArray.map(v=>console.log(v));
+ newArray.map(v=>console.log(v));
 
-const newArray01 = [...todos,{id:5, text:'신발', checked: true}]
-newArray01.map(v=>console.log(v));
+// const newArray01 = [...todos,{id:5, text:'신발', checked: true}]
+// newArray01.map(v=>console.log(v));
 
 
-newArray01.findIndex(todo=>todo.id)
+// newArray01.findIndex(todo=>todo.id)
