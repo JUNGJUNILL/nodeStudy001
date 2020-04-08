@@ -1,22 +1,51 @@
+/*
+function* generator(){
 
-const todos =  [
-  {id:0, text: '  리액트 소개', checked: false},
-  {id:1, text: '  리액트 소개', checked: true},
-  {id:2, text: '  리액트 소개', checked: false},
-] ;
+  console.log(1)
+  console.log(2)
+  yield; //중단점.. 
+  console.log(3)
+  yield* '정준일'; // * 붙이면 뒤 값은 iterable로 처리 (반복 가능한 값) 
+}
+
+const a = generator()
+a.next(); 
+*/
+
+//제너레이터 비동기를 동기처럼... 
+// yield는 해당 함수의 중단점 , 
+// next(), value, done 값을 가진 Object 반환 
+
+/*
+function* gen(){
+  let i= 0; 
+  while(true){
+    yield i++; 
+  }
+
+}
+
+const abc = gen(); 
+abc.next()
+*/
+
+function* gen(param){
+  console.log('a')
+  console.log('b')
+  
+  if(param ===2){
+ 
+    yield ;
+
+  }  
+  console.log('c')
+  
+}
+
+const abc = gen(2); 
+abc.next()
 
 
-const add = [...todos,{id:3, text: ' ' , checked:true}]
-
-// add.map((v)=>console.log(v,'헬로우')); 
-
-
-
-const newArray = todos.concat({id:4,text:'씌발' , checked: true});
- newArray.map(v=>console.log(v));
-
-// const newArray01 = [...todos,{id:5, text:'신발', checked: true}]
-// newArray01.map(v=>console.log(v));
-
-
-// newArray01.findIndex(todo=>todo.id)
+if(abc.next().done){
+  console.log('함수가 종료되었삼')
+}
