@@ -112,14 +112,6 @@ for(const val of gen03){
 }
 
 
-function* generator04(){
-
-  let i=0; 
-  while(true){
-   yield i++; 
-  }
-
-}
 
 //제너레이터
 function* generator04(){
