@@ -1,123 +1,17 @@
 
-const slow = () =>{
+const test =  {id:0, text: '  리액트 소개', checked: false}; 
 
-    console.log('slow'); 
+const abc = {...test , checked : !test.checked}
 
-    return new Promise((resolve,reject)=>{
-
-      setTimeout(()=>{
-
-          resolve(3000); 
-          console.log('오반아 휘파람을 불어라'); 
-      },3000);
-
-    }); 
-  
-}
-
-const fast = ()=>{
-
-    return new Promise((resolve,reject)=>{
-
-        setTimeout(()=>{
-
-            resolve(20); 
-            console.log('오반!!'); 
-        },1000); 
-    }); 
-
-}
+console.log(abc); 
 
 
-let times = ()=>{
+const aaaa = null && null; 
+console.log(null || 0)
 
-  setTimeout(() => {
-
-    console.log('5초'); 
-  }, 5000);
-}
+console.log(aaaa); 
 
 
-let times02 = () =>{
+console.log( 0 || "정준일")
 
 
-  setTimeout(() => {
-
-    console.log('1초'); 
-  }, 1000);
-
-}
-
-
-const test001 = ()=>{
-
-  times(); 
-  times02(); 
-
-}
-
-test001(); 
-
-
-
-
-
-
-let timespromise = ()=>{
-
-  return new Promise((resolve,reject)=>{
-    setTimeout(() => {
-         
-      resolve('5')
-      //console.log('5초')
-    }, 5000);
-  
-
-  }); 
-}
-
-
-let times02promise = () =>{
-
-  return new Promise((resolve,reject)=>{
-    setTimeout(() => {
-         
-    resolve('1'); 
-    //console.log('1초')
-    }, 3000);
-  
-
-  }); 
-  
-}
-
-const test002 = async ()=>{
-
- const five =  await timespromise(); 
- const one= await times02promise(); 
- console.log(five); 
- console.log(one); 
-
-}
-
-//test002(); 
-
-
-
-
-
-
-
-
-const test = async () =>{
-
-  const aa = await slow();
-  const bb = await fast(); 
-
-  console.log(aa); 
-  console.log(bb); 
-
-  console.log(aa," : " , bb);
-}
-
-//test(); 

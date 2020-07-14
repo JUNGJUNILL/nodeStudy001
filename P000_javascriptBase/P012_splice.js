@@ -1,6 +1,9 @@
 //return 값 array 
+//배열 요소 자체를 완전하게 지우기 위함
 
 var myFish = ['angel', 'clown', 'drum', 'mandarin', 'sturgeon'];
+delete myFish[0]; 
+console.log('myFish==>',myFish); //이렇게 하면 배열 요소가 완전히 지워지는게 아님 
 
 console.log(myFish.splice(3,2)); //3번 index부터 2개 빼서 할당하겠다.  
                                  //splice(startIndex,deleteCount) 

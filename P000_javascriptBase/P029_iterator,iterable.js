@@ -11,7 +11,7 @@ https://github.com/nujabes403/functional-js-study/blob/master/README.md
 1. Iterator 
 - iterator는 어떤 자료구조를 순회(traverse)하는데 쓰이는 pointer라고 생각하면 된다. 
 - (ex: database에서의 cursor 역할)
-- next method가 구현되어 있으면 Iterator
+- next method가 구현되어 있고, done, value 속성을 가진 객체를 반환하는 것이 Iterator
 */
 
 //String의 기본 iterator는 String의 문자를 하나씩 반환합니다. 
@@ -29,7 +29,9 @@ console.log('----------------------------------------------')
 2. Iterable
 - [Symbol.iterator] 라는 특정한(specific)이름의 iterator가 있으면 Iterable
 - [Symbol.iterator]는 iterator이므로 위에서 봤듯이 당연히 next method가 구현되어 있어야 함.
+- 이터레이터 객체를 반환하는 객체를 뜻한다. 
 - for of 구문으로 순회(traverse) 가능
+
 */
 const iterableObj = {
     [Symbol.iterator]() {  
@@ -127,15 +129,16 @@ const gen04 = generator04();
 //0부터 .... 무한대로 뽑힘 
 gen04.next(); 
 
-//이렇게 하면 무한루프 돔
+/*이렇게 하면 무한루프 돔
 for(const val of gen04){
   console.log(val); 
 }
+*/
 
 
 
-const gen04 = generator04(); 
-gen04.next(); 
+// const gen04 = generator04(); 
+// gen04.next(); 
 
 
 
