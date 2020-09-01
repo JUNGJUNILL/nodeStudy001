@@ -1,4 +1,3 @@
-
 //배열을 직접 건드려서 수정했을 경우 
 const array = [1,2,3,4]; 
 const sameArray = array; 
@@ -41,7 +40,7 @@ const object01 = {
 
 const sameObject01 = {...object01,baz:'byz'}
 console.log(object01,":",sameObject01)
-console.log(object01 !== sameObject01); // true
+console.log(object01 === sameObject01); // false
 
 
 console.log('---------------------------------------------------------------------------------------------')
@@ -68,6 +67,6 @@ array002[1] = {
 
 
 array002.map(v=>
-  console.log(v)); 
+  console.log('v',v)); 
 
 console.log('---------------------------------------------------------------------------------------------')

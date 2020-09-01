@@ -16,9 +16,9 @@ var cbExample = function(number,cb){
 //param2초 뒤에 param1이 실행된다.
 
 
-cbExample(9999999999,function(result){
+cbExample(84654654654654654,function(result){
 
-    console.log(result); 
+    console.log('result ==>' , result); 
 }); 
 console.log('first'); 
 

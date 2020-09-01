@@ -27,10 +27,8 @@ promise.then((message01)=>{
     console.log(message01); 
 
     return new Promise((resolve,reject)=>{
-        
-
         resolve(message01 +  ' 정 준 일 '); 
-        //reject('test'); 
+        
     });
 
 }).then((message02)=>{
@@ -48,7 +46,7 @@ promise.then((message01)=>{
     });
 }).then((param)=>{
     param.map(function(v,i,arr){
-        console.log(v); 
+        console.log('map ==>',v); 
     })
 }).catch((error)=>{  
     console.log(error); 
@@ -70,13 +68,3 @@ const p3 =new Promise((resolve,reject)=>{
 Promise.all([p1,p2,p3]).then(message=>{
     console.log('Give me a message-> :    ' , message); 
 })
-
-
-
-
-var fruits = ['Banana', 'Orange', 'Lemon', 'Apple', 'Mango'];
-var citrus = fruits.slice(1);
-var test = fruits.slice(1,3); 
-console.log('test->' + test); 
-
-console.log(citrus);

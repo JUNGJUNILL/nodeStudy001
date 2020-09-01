@@ -1,17 +1,6 @@
 
-const test =  {id:0, text: '  리액트 소개', checked: false}; 
 
-const abc = {...test , checked : !test.checked}
+const content = '<p>123123</p>'
+const aaa = content+'\n'.concat(`<img src="https://dimg.donga.com/wps/NEWS/IMAGE/2019/11/24/98510015.1.jpg" alt="undefined" style="float:none;height: auto;width: auto"/>`)
 
-console.log(abc); 
-
-
-const aaaa = null && null; 
-console.log(null || 0)
-
-console.log(aaaa); 
-
-
-console.log( 0 || "정준일")
-
-
+console.log(aaa); 
