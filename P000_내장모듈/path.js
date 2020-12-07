@@ -6,7 +6,7 @@
 const path=require('path'); 
 const string =__filename;
 console.log('__dirname-->' , __dirname); //현재 이 파일의 root부터 폴더까지의 위치  
-console.log(string);
+console.log('__filename-->',string);
 console.log('----------------------------------------------------------------------------------')
 console.log('path.sep', path.sep);
 console.log('path.delimiter',path.delimiter);

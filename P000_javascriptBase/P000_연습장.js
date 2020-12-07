@@ -1,6 +1,23 @@
 
+const todos =  [
+    {id:0, text: '  리액트 소개', checked: false},
+    {id:1, text: '  리액트 소개', checked: true},
+    {id:2, text: '  리액트 소개', checked: false},
+  ] ;
 
-const content = '<p>123123</p>'
-const aaa = content+'\n'.concat(`<img src="https://dimg.donga.com/wps/NEWS/IMAGE/2019/11/24/98510015.1.jpg" alt="undefined" style="float:none;height: auto;width: auto"/>`)
+const array  = [...todos]; 
 
-console.log(aaa); 
+todos.map((v,i)=>{
+
+    if(v.id === 0 ) {
+        array[i] ={ ...todos[i] , checked: !v.checked,good:'테스형'}
+
+    }
+    console.log('array=>' , array.length); 
+
+}); 
+
+
+array.map((v,i)=>{
+    console.log(v); 
+})
