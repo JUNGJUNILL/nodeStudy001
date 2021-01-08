@@ -5,4 +5,5 @@ const test02 ='1234';
 const result = test.split(','); 
 console.log(typeof result); 
 console.log(result); 
-console.log(test02.split(''))
+console.log(test02.split('')) // [1,2,3,4]
+console.log(test02.split(' ')) // [1234]
