@@ -42,6 +42,10 @@ const sameObject01 = {...object01,baz:'byz'}
 console.log(object01,":",sameObject01)
 console.log(object01 === sameObject01); // false
 
+const nest = {b:'c'}; 
+const prev = {a:nest}; 
+const next = {...prev}
+
 
 console.log('---------------------------------------------------------------------------------------------')
 

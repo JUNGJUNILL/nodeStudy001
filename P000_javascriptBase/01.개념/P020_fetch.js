@@ -27,26 +27,26 @@ fetch('http://localhost/asp/base/DealerInfo01_F01_window.jsp')
 
 // console.log('----------------------------------------------------------'); 
 
-// fetch('http://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?key=430156241533f1d058c603178cc3ca0e&targetDt=20120101')
-// .then(result=>result.json()) //json() promise를 반환하므로... 
-// .then(potato=>potato.boxOfficeResult.dailyBoxOfficeList.map(function(v){
-//     console.log(v.rnum+ " : " + v.movieNm , " : " , v.rank); 
-// }));
+fetch('http://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?key=0629834ae89dc98668de1dd8f46c9b34&targetDt=20120101')
+.then(result=>result.json()) //json() promise를 반환하므로... 
+.then(potato=>potato.boxOfficeResult.dailyBoxOfficeList.map(function(v){
+    console.log(v.rnum+ " : " + v.movieNm , " : " , v.rank); 
+}));
 
 
 
 console.log('----------------------------------------------------------'); 
 
-fetch('http://localhost/asp/study/HubmekaAPIServer.jsp?command=load')
-.then(result=>result.json()) //json() promise를 반환하므로... 
-.then(potato=>potato.map((v)=>{
-    console.log(v.EMPNO ," : ", 
-                v.ENAME ," : ",
-                v.JOB ," : ",
-                v.MGR ," : ",
-                v.HIREDATE ," : ",
-                v.SAL ," : ",
-                v.COMM ," : ",
-                v.DEPTNO 
-                ); 
-}));
+// fetch('http://localhost/asp/study/HubmekaAPIServer.jsp?command=load')
+// .then(result=>result.json()) //json() promise를 반환하므로... 
+// .then(potato=>potato.map((v)=>{
+//     console.log(v.EMPNO ," : ", 
+//                 v.ENAME ," : ",
+//                 v.JOB ," : ",
+//                 v.MGR ," : ",
+//                 v.HIREDATE ," : ",
+//                 v.SAL ," : ",
+//                 v.COMM ," : ",
+//                 v.DEPTNO 
+//                 ); 
+// }));

@@ -1,9 +1,9 @@
-const array =[  {id:0, text: '  리액트 소개', checked: false}]
 
+let i=0; 
+function* test01(){
+    while(true){
+    yield console.log(i++)
+}
+}
 
-array[0] = {...array[0] , checked : true}; 
-
-
-array.map((v,i)=>{
-    console.log(v); 
-})
+test01().next(); 
