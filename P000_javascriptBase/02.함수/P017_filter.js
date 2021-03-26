@@ -9,7 +9,7 @@ const result = words.filter(function(word,index,array){
         return array; 
     }
 }); 
-console.log('result',result);
+console.log('result===?',result);
 
 result.map((v)=>console.log(v.length)); 
 

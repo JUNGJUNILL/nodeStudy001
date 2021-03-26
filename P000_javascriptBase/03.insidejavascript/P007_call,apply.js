@@ -18,7 +18,7 @@ var foo01 = {};
 
 Person01.apply(foo01, ['foo',30,'man']); 
 
-console.log(foo01); 
+console.log(JSON.stringify(foo01)); 
 
 
 
