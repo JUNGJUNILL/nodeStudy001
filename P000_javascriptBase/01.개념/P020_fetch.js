@@ -37,16 +37,16 @@ fetch('http://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDaily
 
 console.log('----------------------------------------------------------'); 
 
-// fetch('http://localhost/asp/study/HubmekaAPIServer.jsp?command=load')
-// .then(result=>result.json()) //json() promise를 반환하므로... 
-// .then(potato=>potato.map((v)=>{
-//     console.log(v.EMPNO ," : ", 
-//                 v.ENAME ," : ",
-//                 v.JOB ," : ",
-//                 v.MGR ," : ",
-//                 v.HIREDATE ," : ",
-//                 v.SAL ," : ",
-//                 v.COMM ," : ",
-//                 v.DEPTNO 
-//                 ); 
-// }));
+fetch('http://localhost/asp/study/HubmekaAPIServer.jsp?command=load')
+.then(result=>result.json()) //json() promise를 반환하므로... 
+.then(potato=>potato.map((v)=>{
+    console.log(v.EMPNO ," : ", 
+                v.ENAME ," : ",
+                v.JOB ," : ",
+                v.MGR ," : ",
+                v.HIREDATE ," : ",
+                v.SAL ," : ",
+                v.COMM ," : ",
+                v.DEPTNO 
+                ); 
+}));
