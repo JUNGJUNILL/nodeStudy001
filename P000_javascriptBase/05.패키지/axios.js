@@ -105,8 +105,8 @@ const fetchData = async () =>{
   try{
     const response = await fetch('https://www.hubpass.co.kr/asp/standard/DealerInfo03.jsp?region=Seoul');
     const data = await response.json(); 
-
-    return data; 
+    
+    return JSON.stringify(data); 
 
   }catch(e){
     console.log('에러발생=>', JSON.stringify(e)); 
