@@ -100,12 +100,15 @@ console.log('===================================================================
 // })
 
 
+
+
 const fetchData = async () =>{
 
   try{
-    const response = await fetch('https://www.hubpass.co.kr/asp/standard/DealerInfo03.jsp?region=Seoul');
+    const response = await fetch('https://www.hubpass.co.kr/asp/standard/DealerInfo03.jsp?region=Seoul&start=0&end=50');
+    console.log(response.status); 
+    //const data = await response.status; 
     const data = await response.json(); 
-
     return data; 
 
   }catch(e){
@@ -114,7 +117,15 @@ const fetchData = async () =>{
 
 }
 
+
+fetchData().then((res)=>{
+  console.log(JSON.stringify(res)); 
+
+}).catch((e)=>{
+  console.error(e)
+})
+
 const result  = fetchData(); 
 result.then((res)=>{
-  console.log(JSON.stringify(res)); 
+ // console.log(JSON.stringify(res)); 
 })
