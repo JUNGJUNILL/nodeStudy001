@@ -74,3 +74,13 @@ array002.map(v=>
   console.log('v',v)); 
 
 console.log('---------------------------------------------------------------------------------------------')
+
+
+
+
+const array003 = [...todos]; 
+
+array003.map((v,i)=>{
+ v = {...v,...{text:'femaleeeeee'}}
+ console.log(JSON.stringify(v)); 
+}); 
