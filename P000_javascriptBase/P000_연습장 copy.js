@@ -1,8 +1,8 @@
-const array=[]; 
-const array1=['1','2','3'];
 
-array.concat(array1); 
 
-array.map((v)=>{
-  console.log(v); 
-})
+try{
+    console.log('rrr'); 
+    throw new Error('hello'); 
+}catch(e){
+    console.log(e.message)
+}

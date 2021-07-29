@@ -109,12 +109,10 @@ const fetchData = async () =>{
     console.log(response.status); 
     //const data = await response.status; 
     const data = await response.json(); 
-<<<<<<< HEAD
     return data; 
-=======
+
     
     return JSON.stringify(data); 
->>>>>>> 00287f6179fc16cb39065a0160c60c6d1463d292
 
   }catch(e){
     console.log('에러발생=>', JSON.stringify(e)); 
@@ -132,5 +130,5 @@ fetchData().then((res)=>{
 
 const result  = fetchData(); 
 result.then((res)=>{
- // console.log(JSON.stringify(res)); 
+  console.log(JSON.stringify(res)); 
 })
