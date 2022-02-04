@@ -1,13 +1,18 @@
 const fs = require('fs'); 
-fs.readFile(__dirname+'/good.txt','utf8',(err,data)=>{
+fs.readFile(__dirname+'/z_001_whereData.txt','utf8',(err,data)=>{
 
     let array  = data.replace(/\r\n/g,',').split(',');
     
    array.map((v,i)=>{
-    v = `'${v}',\n`
+    if(array.length-1==i){
+        v = `'${v}'`
+    }else{
+        v = `'${v}',\n`
+    }
+   // v = `'${v}',\n`
     try{
 
-        fs.appendFileSync('./P000_makeinsertQuyeryStorage/test.txt', v);
+        fs.appendFileSync(__dirname+'/z_002_whereResult.txt', v);
            if(array.length-1 === i){
                console.log('파일 생성이 완료되었습니다.'); 
            }

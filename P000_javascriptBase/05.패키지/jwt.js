@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken'); 
-const token = jwt.sign({nick:'hello world',},
+const token = jwt.sign({nick:'',},
                       'JWTSCRET',
                       {
                           expiresIn:'10m',

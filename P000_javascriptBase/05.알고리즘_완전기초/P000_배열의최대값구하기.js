@@ -8,7 +8,7 @@ const maxValue =(array,length)=>{
     max = array[0]; 
 
     for(let j=1; j<length; j++){
-        if(max < array[j]){
+        if(max > array[j]){
             max = array[j]; 
         }
     }
