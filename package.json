@@ -39,7 +39,7 @@
     "node-fetch": "^2.6.0",
     "node-ipinfo": "^2.0.2",
     "nodemailer": "^6.6.3",
-    "pug": "^2.0.4",
+    "pug": "^3.0.1",
     "sequelize": "^5.21.3",
     "tedious": "^6.6.5",
     "xmlhttprequest": "^1.8.0"
