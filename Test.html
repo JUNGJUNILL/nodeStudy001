@@ -3,61 +3,27 @@
  <head>
   <meta charset="UTF-8">
   <title>Document</title>
+
+
  </head>
+ <script>
+  function test1(){
+    try{
+      var v =document.getElementsByName('hello')[0].value; 
+      document.getElementsByName("hello")[0].select(); 
+      alert(v); 
+    }catch(e){
+      alert(e) 
+    }
+
+  }
+ </script>
  <body>
-      <table border="1">
-          <tr>
-              <th rowspan="2">No</th>
-              <th rowspan="2">사진</th>
-              <th colspan="2">품명</th>
-              <th>단가</th>
-              <th>단위</th>
-              <th>내 품목</th>
-              <th rowspan='2' >매입처명</th>
-              <th rowspan='2' colspan='2' width="30%">수량</th>
-    
-          </tr>
-          <tr>
-            <th>LT</th>
-            <th>규격</th>
-            <th>부가세</th>	
-            <th>원산지</th>
-            <th>최근</th>	
-        </tr>	
+  <input type="text" value="222" name="hello" onfocus="javascript:test1()"/>
+  <input type="button" value="벗은" onclick="javascript:test1();"/>
+  <script>
+    alert('안녕하세요!'); 
+  </script>
 
-        <tr>
-            <td rowspan=="2">
-                1
-            </td>
-            <td rowspan=="2">
-                사진
-            </td>
-            <td colspan="2">
-                품목명
-            </td>
-            <td >
-                단가
-            </td>
-            <td >
-                단위
-            </td>
-            <td >
-                내품목
-            </td>
-            <td>
-                매입처명
-            </td>
-            <td rowspan="2" colspan="2">
-                수량
-            </td>
-      
-      
-   
-
-        </tr>
-
-      </table>
-
-      <span style=color:red>hello</span>
 </body>
 </html>

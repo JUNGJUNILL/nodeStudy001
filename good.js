@@ -11,3 +11,9 @@ buf.map((v,i,array)=>{
 
 encodeStr = encodeStr.toUpperCase();
 console.log("hello", encodeStr); 
+
+const a = [1001,1002,1003,1004,1005]; 
+
+a.map((v,i,array)=>{
+    console.log(v)
+})
