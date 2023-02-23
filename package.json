@@ -40,7 +40,7 @@
     "node-ipinfo": "^2.0.2",
     "nodemailer": "^6.6.3",
     "pug": "^2.0.4",
-    "sequelize": "^5.21.3",
+    "sequelize": "^6.28.2",
     "tedious": "^6.6.5",
     "xmlhttprequest": "^1.8.0"
   },
